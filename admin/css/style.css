@@ -1,0 +1,84 @@
+.toplevel_page_wpmarketing * { 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.wpmarketing .welcome-panel {
+	padding: 0%;
+}
+
+.wpmarketing h2 {
+	display: inline-block;
+}
+
+.wpmarketing_desc {
+	color: #777;
+	display: inline-block;
+}
+
+.wpmarketing .cta {
+	float: right;
+}
+
+.app_icon {
+	float: left;
+	width: 22.5%;
+	margin: 2%;
+	text-align: center;
+	border-radius: 10px;
+	cursor: pointer;
+	padding: 10px;
+	border: 1px solid transparent;
+	box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+	background-image: url(../imgs/shadow.png);
+	background-position: bottom;
+	background-repeat: repeat-x;
+}
+
+.app_icon:nth-child(4n+2), .app_icon:nth-child(4n+3) {
+	margin-left: 0;
+	margin-right: 2%;
+}
+
+.app_icon:nth-child(4n+4) {
+	margin-left: 0;
+}
+
+.app_icon:nth-child(n+5) {
+	margin-top: 0;
+}
+
+.app_icon h3 {
+	color: #fff;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+	font-size: 16px;
+	text-align: right;
+	font-weight: bold;
+	padding-top: 80px;
+}
+
+.app {
+	display: none;
+	margin: 2%;
+	min-height: 500px;
+}
+
+.app .header {
+	border: 1px solid transparent;
+	border-radius: 10px 10px 0 0;
+	padding: 20px;
+	box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+	background-image: url(../imgs/shadow.png);
+	background-position: bottom;
+	background-repeat: repeat-x;
+}
+
+.app .header h3 {
+	text-align: right;
+	font-size: 36px;
+	font-weight: bold;
+	color: #fff;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+	margin-top: 80px;
+}
