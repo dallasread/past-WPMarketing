@@ -1,92 +1,94 @@
 jQuery(function($) {
 	window.wpMarketing = {
 		apps: {
-			action_bar: {
-				name: "Action Bar",
-				colour: "#2EA2CC"
-			}, 
-			pop_over: {
-				name: "Pop Over",
-				colour: "#C33E7D"
+			lead_generator: {
+				name: "LeadGenerator",
+				description: "Call-To-Actions, Autoresponders, and Analytics in one place.",
+				colour: "#0E8FAA",
+				installed: true,
+				premium: true,
+				notes: "Pop Over, Top bar, bottom right, right middle || Digital Downloads, Subscriptions, Polls, Surveys, Contact Form, Call Back, Appointment Booker, LivelyChat"
+			}, // C33E7D, , , , , , , , , 7A933D
+			touch_base: {
+				name: "TouchBase",
+				description: "A single helpdesk to respond to all your leads and contacts.",
+				colour: "#993066",
+				installed: true,
+				premium: true
 			},
-			google_search: {
-				name: "Search Text",
-				colour: "#13B6A5"
-			},
-			digital_downloads: {
-				name: "Digital Downloads",
-				colour: "#946F65"
-			},
-			contacts: {
-				name: "Contacts",
-				colour: "#7A933D"
-			},
-			subscriptions: {
-				name: "Subscriptions",
-				colour: "#3A3B99"
-			},
-			landing_pages: {
-				name: "3-Step Landing Pages",
-				colour: "#AD3C2D",
-				notes: "Choose a template, Add your content, Publish"
-			},
-			integrations: {
-				name: "3rd-Party Integrations",
-				colour: "#5D1625"
-			},
-			polls: {
-				name: "Polls",
-				colour: "#724C78"
-			},
-			surveys: {
-				name: "Surveys",
-				colour: "#E36E64"
-			},
-			contact_form: {
-				name: "Contact Form",
-				colour: "#19490A"
-			},
-			social_buttons: {
-				name: "Social Buttons",
-				colour: "#B6892B"
-			},
-			seo: {
+			supercharged_seo: {
 				name: "Supercharged SEO",
-				colour: "#0F6F4B"
+				description: "Dynamic, fully-tailored, optimizations for best ranking results.",
+				colour: "#0F6F4B",
+				installed: true,
+				premium: true
 			},
-			social_posting: {
-				name: "AutoSocialize",
-				colour: "#5BAAC6"
+			landing_pager: {
+				name: "LandingPager",
+				description: "3 Steps: Choose a template, Add your content, Publish.",
+				colour: "#AD3C2D",
+				installed: true,
+				premium: true
 			},
-			call_back: {
-				name: "Call Back",
-				colour: "#723C99"
+			easyshare_buttons: {
+				name: "EasyShare Buttons",
+				description: "Sharing buttons that increase your social reach.",
+				colour: "#B6892B",
+				installed: true,
+				premium: true
 			},
-			appointments: {
-				name: "Appointment Booker",
-				colour: "#297971"
-			},
-			live_chat: {
-				name: "Live chat",
-				colour: "#993066"
+			relevant_text: {
+				name: "RelevantText",
+				description: "Display relevant content to Googlers, Bingers and Yahooers.",
+				colour: "#3A3B99",
+				installed: true,
+				premium: true
 			},
 			ads_wizard: {
 				name: "Ads Wizard",
-				colour: "#AD4C22"
+				description: "Step-by-step ad writing and publishing walkthrough.",
+				colour: "#AD4C22",
+				installed: true,
+				premium: true
+			},
+			integrations: {
+				name: "3rd-Party Integrations",
+				description: "Mailchimp, Aweber, GetResponse, Wufoo, etc.",
+				colour: "#297971",
+				installed: true,
+				premium: true
+			},
+			autosocializer: {
+				name: "AutoSocializer",
+				description: "Automatically have new posts announced via social media.",
+				colour: "#723C99",
+				installed: true,
+				premium: true
 			},
 			settings: {
 				name: "Settings",
-				colour: "#444444"
+				description: "Sitewide WP Marketing options and preferences.",
+				colour: "#444444",
+				installed: true,
+				premium: true
 			},
 			upgrade: {
 				name: "Upgrade",
-				colour: "#0E8FAA"
+				description: "Purchase a license for full access to WP Marketing apps!",
+				colour: "#5D1625",
+				installed: true,
+				premium: true
 			}
 		},
 	
 		setApp: function (namespace) {
 			var app = window.wpMarketing.apps[namespace];
+
+			$(".wpmarketing .home").hide();
+			$(".wpmarketing .app:not([data-app='" + namespace + "'])").hide();
+			$(".wpmarketing .app[data-app='" + namespace + "']").show();
 			
+			$(".wpmarketing .app .header").html("<a href=\"#\" class=\"go_home button\">&larr; Back to Apps</a> &nbsp;<a href=\"#\" class=\"button\" data-show=\"upgrade\">Get More Apps</a><h3></h3>");
 			$(".wpmarketing .app .header h3").text(app.name);
 			$(".wpmarketing .app .header").css({
 				"background-color": app.colour,
@@ -98,9 +100,10 @@ jQuery(function($) {
 			$(".wpmarketing .home").html("");
 	
 			$.each(window.wpMarketing.apps, function(namespace, app) {
-				var template = $("<div class=\"app_icon\"><h3></h3></div>");
+				var template = $("<div class=\"app_icon\"><h3></h3><p></p></div>");
 				template.attr("data-show", namespace);
 				template.find("h3").text(app.name);
+				template.find("p").text(app.description);
 				template.css({
 					"background-color": app.colour,
 					"border-color": app.colour
@@ -113,8 +116,6 @@ jQuery(function($) {
 	$(document).on("click", ".wpmarketing [data-show]", function() {
 		var namespace = $(this).attr("data-show");
 		window.wpMarketing.setApp(namespace);
-		$(".wpmarketing .home").hide();
-		$(".wpmarketing .app").show();
 		$("html, body").scrollTop(0);
 		return false;
 	});

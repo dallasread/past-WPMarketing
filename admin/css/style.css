@@ -4,8 +4,8 @@
 	box-sizing: border-box;
 }
 
-.wpmarketing .welcome-panel {
-	padding: 0%;
+.wpmarketing .main_wrapper {
+	margin-top: 10px;
 }
 
 .wpmarketing h2 {
@@ -23,12 +23,12 @@
 
 .app_icon {
 	float: left;
-	width: 22.5%;
-	margin: 2%;
+	width: 23.5%;
+	margin: 0 2% 2% 0;
 	text-align: center;
 	border-radius: 10px;
 	cursor: pointer;
-	padding: 10px;
+	padding: 15px;
 	border: 1px solid transparent;
 	box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.3);
 	background-image: url(../imgs/shadow.png);
@@ -36,17 +36,17 @@
 	background-repeat: repeat-x;
 }
 
-.app_icon:nth-child(4n+2), .app_icon:nth-child(4n+3) {
-	margin-left: 0;
-	margin-right: 2%;
+.app_icon:nth-child(4n+3) {
+	margin-right: 0;
 }
 
 .app_icon:nth-child(4n+4) {
-	margin-left: 0;
+	margin-left: 2%;
+	margin-right: 0;
 }
 
-.app_icon:nth-child(n+5) {
-	margin-top: 0;
+.app_icon:nth-child(4n+1) {
+	clear: both;
 }
 
 .app_icon h3 {
@@ -55,12 +55,21 @@
 	font-size: 16px;
 	text-align: right;
 	font-weight: bold;
-	padding-top: 80px;
+	padding-top: 60px;
+	margin: 0;
+}
+
+.app_icon p {
+	color: #fff;
+	color: rgba(255, 255, 255, 0.7);
+	text-align: right;
+	margin: 6px 0 0 0;
+	font-size: 11px;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .app {
 	display: none;
-	margin: 2%;
 	min-height: 500px;
 }
 
@@ -80,5 +89,13 @@
 	font-weight: bold;
 	color: #fff;
 	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-	margin-top: 80px;
+	margin: 20px 0 10px 0;
+}
+
+.app .content {
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-radius: 0 0 10px 10px;
+	background: #fff;
 }

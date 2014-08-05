@@ -56,7 +56,7 @@ class WPMarketing
     add_menu_page( "WP Marketing Guru", "Marketing", 7, "wpmarketing", array("WPMarketing", "admin_panel"), "", 25 );
   }
 	
-	public static function tabs() {
+	public static function php() {
 		return array( "welcome", "purchase" );
 	}
   
@@ -65,14 +65,14 @@ class WPMarketing
     WPMarketing::parse_params();
     $wpmarketing = WPMarketing::settings();
 		
-		if (!isset($_GET["tab"]) || !in_array($_GET["tab"], WPMarketing::tabs())) { 
+		if (!isset($_GET["tab"]) || !in_array($_GET["tab"], WPMarketing::php())) { 
 			$_GET["tab"] = "welcome";
 		}
 		
 		if ($wpmarketing["activated"]) {
-			require_once "admin/tabs/activate.php";
+			require_once "admin/php/activate.php";
 		} else {
-			require_once "admin/tabs/welcome.php";
+			require_once "admin/php/welcome.php";
 		}
   }
 	
