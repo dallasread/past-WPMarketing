@@ -160,13 +160,9 @@ class WPMarketing
     //   echo "<script src=\"" . plugins_url() . "/wpmarketing/WPMarketing.guru/tmp/0.0.1/WPMarketing-0.0.1.js\" id=\"cobrowser\"" . $wpmarketing_options . "></script>";
     // }
   }
-  
-  public static function folder() {
-    return dirname(__FILE__);
-  }
 }
 
-//WPMarketing::uninstall();
+// WPMarketing::uninstall();
 WPMarketing::init();
 
 ?>

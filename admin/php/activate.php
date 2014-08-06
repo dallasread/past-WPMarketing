@@ -15,18 +15,18 @@
 				
 			  <form action="admin.php?page=wpmarketing" method="post" class="activation_form" accept-charset="utf-8">
 					<?php if ($_POST) { ?>
-						<p class="wpmarketing_error">You must fill in <strong>Your Name</strong> and <strong>Your Email</strong> to use WP Marketing.</p>
+						<p class="wpmarketing_error">You must fill in <strong>Your Name</strong> and provide a valid <strong>Email Address</strong> to use WP Marketing.</p>
 					<?php } ?>
 					
 					<div style="margin: 35px 0; ">
 						<div class="field">
 				      <label for="name">Your Name</label>
-				      <input type="text" name="name" id="name" value="<?php echo $wpmarketing["name"]; ?>">
+				      <input type="text" name="name" id="name" value="<?php echo $_POST["name"]; ?>">
 				    </div>
 
 				    <div class="field">
 				      <label for="email">Your Email</label>
-				      <input type="text" name="email" id="email" value="<?php echo $wpmarketing["email"]; ?>">
+				      <input type="text" name="email" id="email" value="<?php echo $_POST["email"]; ?>">
 				    </div>
 					</div>
 

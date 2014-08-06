@@ -2,6 +2,8 @@ jQuery(function($) {
 	window.wpMarketing = {
 		plugins_url: $(".wpmarketing").data("plugins_url"),
 		unlock_code: $(".wpmarketing").data("unlock_code"),
+		unlocked: !!$(".wpmarketing").data("unlock_code").length,
+		current_app: null,
 		apps: {
 			lead_generator: {
 				name: "LeadGenerator",
@@ -86,23 +88,26 @@ jQuery(function($) {
 		setApp: function (namespace) {
 			var app = window.wpMarketing.apps[namespace];
 
-			if (!app.installed) {
+			if (!app.installed && !window.wpMarketing.unlocked) {
 				namespace = "upgrade";
 				app = window.wpMarketing.apps[namespace];
 			}
 			
-			$(".wpmarketing .home").hide();
-			$(".wpmarketing .app:not([data-app='" + namespace + "'])").hide();
-			$(".wpmarketing .app[data-app='" + namespace + "']").show();
+			if (window.wpMarketing.current_app != namespace) {
+				window.wpMarketing.current_app = namespace;
+				$(".wpmarketing .home").hide();
+				$(".wpmarketing .app:not([data-app='" + namespace + "'])").hide();
+				$(".wpmarketing .app[data-app='" + namespace + "']").show();
 		
-			$(".wpmarketing .app .header").html("<a href=\"#\" class=\"go_home button\">&larr; Back to Apps</a> &nbsp;<a href=\"#\" class=\"button\" data-show=\"upgrade\">Get More Apps</a><h3></h3>");
-			$(".wpmarketing .app .header h3").text(app.name);
-			$(".wpmarketing .app .header").css({
-				"background-color": app.colour,
-				"border-color": app.colour
-			});
+				$(".wpmarketing .app .header").html("<a href=\"#\" class=\"go_home button\">&larr; Back to Apps</a> &nbsp;<a href=\"#\" class=\"button\" data-show=\"upgrade\">Get More Apps</a><h3></h3>");
+				$(".wpmarketing .app .header h3").text(app.name);
+				$(".wpmarketing .app .header").css({
+					"background-color": app.colour,
+					"border-color": app.colour
+				});
 		
-			$("html, body").scrollTop(0);
+				$("html, body").scrollTop(0);
+			}
 		},
 		
 		init: function () {
@@ -128,7 +133,7 @@ jQuery(function($) {
 			});
 			
 			if ($(".wpmarketing").hasClass("unlocked")) {
-				$(".wpmarketing .app_icon[data-show='upgrade']").remove();
+				$(".wpmarketing .app_icon[data-show='upgrade'], .wpmarketing [data-show-for='upgrade']").remove();
 			}
 		}
 	}
@@ -170,7 +175,8 @@ jQuery(function($) {
 				$(".unlock_code").text(json.unlock_code);
 				$(".unlock_code_form").show()
 				$(".change_unlock_code_form").hide();
-				$(".wpmarketing .app_icon[data-show='upgrade']").remove();
+				$(".wpmarketing .app_icon[data-show='upgrade'], .wpmarketing [data-show-for='upgrade']").remove();
+				window.wpMarketing.unlocked = true;
 			} else {
 				alert("The unlock code you provided was invalid.");
 				$(".unlock_code_form").find(".loading").hide(150);
