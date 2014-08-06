@@ -1,8 +1,6 @@
-<div class="wrap wpmarketing">
-	<a href="?page=wpmarketing&tab=purchase" class="cta button button-primary button-large" data-show="upgrade">Unlock All Apps</a>
+<div class="wrap wpmarketing <?php if ($wpmarketing["unlock_code"] != "") { echo "un"; } ?>locked" data-plugins_url="<?php echo plugins_url("wpmarketing/"); ?>" data-unlock_code="<?php echo $wpmarketing["unlock_code"]; ?>">
 	
-	<h2>WP Marketing</h2>
-	<p class="wpmarketing_desc">Apps to boost and build your website's audience!</p>
+	<?php require_once "header.php"; ?>
 	
 	<div class="main_wrapper">
 		<div class="home">

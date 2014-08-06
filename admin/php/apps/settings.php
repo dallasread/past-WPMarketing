@@ -2,6 +2,6 @@
 	<div class="header"></div>
 	
 	<div class="content">
-		This is the app content
+		<a data-change-unlock-code>Change my unlock code.</a>
 	</div>
 </div>

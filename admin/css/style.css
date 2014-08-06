@@ -34,6 +34,7 @@
 	background-image: url(../imgs/shadow.png);
 	background-position: bottom;
 	background-repeat: repeat-x;
+	position: relative;
 }
 
 .app_icon:nth-child(4n+3) {
@@ -68,9 +69,36 @@
 	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+.app_icon .coming_soon {
+	display: none;
+}
+
+.app_icon.is_coming_soon {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+	filter: alpha(opacity=40);
+	-moz-opacity: 0.4;
+	-khtml-opacity: 0.4;
+	opacity: 0.4;
+	cursor: default;
+}
+
+.app_icon.is_coming_soon .coming_soon {
+	display: block;
+	position: absolute;
+	top: 15px;
+	left: 15px;
+}
+
 .app {
 	display: none;
-	min-height: 500px;
+}
+
+.app[data-app="activate"] {
+	display: block;
+}
+
+.app[data-app="activate"] .header {
+	background: #0E8FAA;
 }
 
 .app .header {
@@ -89,7 +117,7 @@
 	font-weight: bold;
 	color: #fff;
 	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-	margin: 20px 0 10px 0;
+	margin: 25px 0 15px 0;
 }
 
 .app .content {
@@ -98,4 +126,132 @@
 	border-left: 1px solid #ccc;
 	border-radius: 0 0 10px 10px;
 	background: #fff;
+	min-height: 400px;
+	padding: 20px;
+}
+
+.app .content .narrow_content {
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+.app .content [data-app-list] {
+	list-style: disc;
+	margin: 0 0 0 25px;
+}
+
+.app .content [data-app-list] .description {
+	color: #999;
+}
+
+.button.orange, .button.orange:hover {
+	background: #ffb459;
+	background: -moz-linear-gradient(top,  #ffb459 0%, #fb9d23 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffb459), color-stop(100%,#fb9d23));
+	background: -webkit-linear-gradient(top,  #ffb459 0%,#fb9d23 100%);
+	background: -o-linear-gradient(top,  #ffb459 0%,#fb9d23 100%);
+	background: -ms-linear-gradient(top,  #ffb459 0%,#fb9d23 100%);
+	background: linear-gradient(to bottom,  #ffb459 0%,#fb9d23 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb459', endColorstr='#fb9d23',GradientType=0 );
+	border-color: #E18C1E;
+	box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+	text-shadow: 1px 1px 2px #E18C1E;
+}
+
+.button_wrapper {
+	text-align: center;
+	margin: 40px 0; 
+}
+
+.pricing_table {
+	text-align: center;
+	background: #f3f3f3 !important;
+}
+
+.pricing_table th {
+	font-weight: bold;
+	font-size: 26px;
+	text-align: center;
+}
+
+.pricing_table tr td:first-child, .pricing_table tr th:first-child {
+	border-right: 1px solid #ddd;
+}
+
+.pricing_table tr td:last-child, .pricing_table tr th:last-child {
+	border-left: 1px solid #ddd;
+}
+
+.wpmarketing_highlight {
+	background: #FFF155;
+	padding: 3px 8px;
+}
+
+.wpmarketing .faq .question {
+	font-weight: bold;
+	font-size: 1.2em;
+	margin-bottom: -10px;
+}
+
+.wpmarketing .blue_form {
+	background: #D5F5FF;
+	padding: 20px;
+	border-radius: 7px;
+	border: 1px solid #BAD7DF;
+	margin-bottom: 30px;
+	margin-top: 10px;
+}
+
+.wpmarketing .blue_form p:first-child {
+	margin-top: 0;
+}
+
+.wpmarketing .blue_form p:last-child {
+	margin-bottom: 0;
+}
+
+.wpmarketing.locked .change_unlock_code_form {
+	display: none;
+}
+
+.wpmarketing.unlocked .unlock_code_form {
+	display: none;
+}
+
+.wpmarketing .unlock_code_form input[name="unlock_code"] {
+	width: 19em;
+	max-width: 100%;
+}
+
+.wpmarketing.unlocked [data-show="upgrade"] {
+	display: none;
+}
+
+.wpmarketing .unlock_code_form .loading, .wpmarketing .unlock_code_form .success {
+	text-align: center;
+	display: none;
+}
+
+.wpmarketing .unlock_code_form .loading {
+	padding: 30px;
+}
+
+.wpmarketing .activation_form .field {
+	margin: 10px 0;
+}
+
+.wpmarketing .activation_form label {
+	width: 8em;
+	text-align: right;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+.wpmarketing_error {
+	background: #F4D6C6;
+	border-radius: 4px;
+	border: 1px solid #B5847A;
+	padding: 10px;
+	color: #9F3331;
+	margin-bottom: 30px;
 }

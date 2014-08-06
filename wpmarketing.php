@@ -49,14 +49,15 @@ class WPMarketing
   private function __construct() {
     add_action( "admin_menu", array( $this, "menu_page" ) );
 		add_action( "admin_init", array( $this, "admin_footer" ) );
+		add_action( "wp_ajax_unlock", array( $this, "unlock" ) );
     register_uninstall_hook( __FILE__, array( $this, "uninstall" ) );
   }
   
   public static function menu_page() {
-    add_menu_page( "WP Marketing Guru", "Marketing", 7, "wpmarketing", array("WPMarketing", "admin_panel"), "", 25 );
+    add_menu_page( "WP Marketing", "Marketing", 7, "wpmarketing", array("WPMarketing", "admin_panel"), "dashicons-editor-expand", 25 );
   }
 	
-	public static function php() {
+	public static function tabs() {
 		return array( "welcome", "purchase" );
 	}
   
@@ -65,14 +66,14 @@ class WPMarketing
     WPMarketing::parse_params();
     $wpmarketing = WPMarketing::settings();
 		
-		if (!isset($_GET["tab"]) || !in_array($_GET["tab"], WPMarketing::php())) { 
+		if (!isset($_GET["tab"]) || !in_array($_GET["tab"], WPMarketing::tabs())) { 
 			$_GET["tab"] = "welcome";
 		}
 		
-		if ($wpmarketing["activated"]) {
+		if ($wpmarketing["subscriber_email"] == "") {
 			require_once "admin/php/activate.php";
 		} else {
-			require_once "admin/php/welcome.php";
+			require_once "admin/php/structure.php";
 		}
   }
 	
@@ -80,7 +81,7 @@ class WPMarketing
 		wp_register_style( "wpmarketing_style", plugins_url("admin/css/style.css", __FILE__) );
 		wp_enqueue_style( "wpmarketing_style" );
 
-		wp_register_script( "wpmarketing_script", plugins_url("admin/js/app.js", __FILE__) );
+		wp_register_script( "wpmarketing_script", plugins_url("admin/js/admin.js", __FILE__) );
 		wp_enqueue_script( "wpmarketing_script", array( "jquery" ) );
 	}
   
@@ -88,44 +89,59 @@ class WPMarketing
     delete_option("wpmarketing_settings");
   }
   
-  public static function settings($update = false) {
+  public static function settings($update = array()) {
 		global $wpmarketing;
 		
-    $defaults = array(
-      "version" => 0,
-      "db_version" => 0,
-      "activation_code" => "",
-      "subscriber_name" => "",
-      "subscriber_email" => "",
-			"activated" => false
-    );
-		
-    if (empty($wpmarketing)) {
-	    $settings_json = json_decode( get_option("wpmarketing_settings", array()), true );
-			$wpmarketing = array_merge($defaults, $settings_json);
+    if (empty($wpmarketing) || !empty($update)) {
+			$settings = get_option("wpmarketing_settings");
+			if ($settings == null) { $settings = array(); }
 			
-			if ($wpmarketing != $settings_json || $update) {
-				if ($update) { $wpmarketing = array_merge($wpmarketing, $update); }
-	      $settings_json = update_option("wpmarketing_settings", json_encode($wpmarketing));
-	    }
-    }
+	    $defaults = array(
+	      "version" => 0,
+	      "db_version" => 0,
+				"website" => $_SERVER["SERVER_NAME"],
+	      "unlock_code" => "",
+	      "subscriber_name" => "",
+	      "subscriber_email" => ""
+	    );
+			
+			if (!empty($update) || $wpmarketing != $settings) {
+				$wpmarketing = array_merge($defaults, $settings);
+				$wpmarketing = array_merge($wpmarketing, $update);
+				update_option("wpmarketing_settings", $wpmarketing);
+			}    
+		}
 				
     return $wpmarketing;
   }
+	
+	public static function unlock() {
+		$data = array( "success" => false );
+		
+    if (isset($_POST["unlock_code"])) {
+			$unlock_code = trim($_POST["unlock_code"]);
+      $request = new WP_Http;
+      $result = $request->request("http://guitarvid.com/activation/wpmarketing/activate.php?unlock_code=" . $unlock_code);
+      $response = json_decode($result["body"]);
+			
+			if ($response->success == 1) {
+        $data = WPMarketing::settings( array( "unlock_code" => $unlock_code ) );
+				$data["success"] = true;
+      }
+		}
+		
+    die(json_encode($data));
+	}
   
   public static function parse_params() {
-    // if (isset($_POST["email"]) && is_email($_POST["email"])) { update_option("wpmarketing_email", sanitize_email($_POST["email"])); }
-    // if (isset($_POST["name"])) { update_option("wpmarketing_name", trim($_POST["name"])); } 
-    // if (isset($_POST["website"])) { update_option("wpmarketing_website", $_POST["website"]); }
-    // if (isset($_GET["active"])) { update_option("wpmarketing_active", $_GET["active"]); }
-    // if (isset($_POST["api_key"])) {
-    //   update_option("wpmarketing_api_key", $_POST["api_key"]); 
-    //   update_option("wpmarketing_active", "1");
-    //   
-    //   if (get_option("wpmarketing_activated_at")) {
-    //     update_option("wpmarketing_activated_at", time());
-    //   }
-    // }
+		global $wpmarketing;
+		
+    if (isset($_POST["email"]) && is_email($_POST["email"]) && isset($_POST["name"])) {
+			WPMarketing::settings( array(
+				"subscriber_name" => trim($_POST["name"]),
+				"subscriber_email" => sanitize_email($_POST["email"])
+			) );
+		}
   }
   
   public static function footer() {
@@ -150,7 +166,7 @@ class WPMarketing
   }
 }
 
-// WPMarketing::uninstall();
+//WPMarketing::uninstall();
 WPMarketing::init();
 
 ?>
