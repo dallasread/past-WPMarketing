@@ -2,6 +2,11 @@
 	<div class="header"></div>
 	
 	<div class="content">
-		This is the app content
+		<div class="topbar">
+			<a href="#" class="button">New Landing Page</a>
+			<select>
+				<option>Home Page</option>
+			</select>
+		</div>
 	</div>
 </div>

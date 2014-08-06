@@ -2,6 +2,7 @@
 	<div class="header"></div>
 	
 	<div class="content">
-		This is the app content
+		A single helpdesk to respond to all your leads and contacts.<br><br>
+		TouchBase is coming soon!
 	</div>
 </div>

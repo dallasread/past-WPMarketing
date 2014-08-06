@@ -2,6 +2,8 @@
 	<div class="header"></div>
 	
 	<div class="content">
-		<a href="#" data-change-unlock-code>Change my unlock code.</a>
+		<p>
+			<a href="#" data-change-unlock-code>Change my unlock code.</a>
+		</p>
 	</div>
 </div>

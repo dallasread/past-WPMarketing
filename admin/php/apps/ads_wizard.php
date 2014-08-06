@@ -2,6 +2,7 @@
 	<div class="header"></div>
 	
 	<div class="content">
-		This is the app content
+		Step-by-step ad writing and publishing walkthrough.<br><br>
+		Ads Wizard is coming soon!
 	</div>
 </div>

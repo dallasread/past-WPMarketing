@@ -2,6 +2,7 @@
 	<div class="header"></div>
 	
 	<div class="content">
-		This is the app content
+		Sharing buttons that increase your social reach.<br><br>
+		EasyShare Buttons is coming soon!
 	</div>
 </div>

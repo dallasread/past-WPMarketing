@@ -82,7 +82,8 @@ class WPMarketing
 		wp_enqueue_style( "wpmarketing_style" );
 
 		wp_register_script( "wpmarketing_script", plugins_url("admin/js/admin.js", __FILE__) );
-		wp_enqueue_script( "wpmarketing_script", array( "jquery" ) );
+		wp_register_script( "wpmarketing_landing_pager", plugins_url("admin/js/apps/landing_pager.js", __FILE__) );
+		wp_enqueue_script( array( "wpmarketing_landing_pager", "wpmarketing_script", "jquery" ) );
 	}
   
   public static function uninstall() {

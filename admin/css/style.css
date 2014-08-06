@@ -255,3 +255,10 @@
 	color: #9F3331;
 	margin-bottom: 30px;
 }
+
+.wpmarketing .topbar {
+	background: #eee;
+	margin: -20px;
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+}
