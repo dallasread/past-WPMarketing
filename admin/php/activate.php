@@ -28,9 +28,12 @@
 				      <label for="email">Your Email</label>
 				      <input type="text" name="email" id="email" value="<?php echo $_POST["email"]; ?>">
 				    </div>
+						
+						<p style="font-size: 10px; color: #aaa; "><br>&check; &nbsp; By activating WP Marketing, you are opting in to receive WP Marketing updates (new features, special offers).</p>
 					</div>
 
 			    <div class="field">
+						
 						<input type="submit" value="Start Using WP Marketing &nbsp; &nbsp; &rarr;" class="button button-primary button-hero orange">
 					</div>
 			  </form>

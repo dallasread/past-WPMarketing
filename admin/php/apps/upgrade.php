@@ -66,8 +66,8 @@
 					<tbody>
 						<tr>
 							<td>$99 / year</td>
-							<td style="background: #fff; ">$149 / year</td>
-							<td>$199 / year</td>
+							<td style="background: #fff; ">$199 / year</td>
+							<td>$299 / year</td>
 						</tr>
 						<tr>
 							<td>1 Site</td>
@@ -91,7 +91,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<p>We also offer a <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SA2LARZBRG46U" target="_blank">100-site package for $799</a>.</p>
+				<p>We also offer a <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SA2LARZBRG46U" target="_blank">100-site package for $899</a>.</p>
 			
 				<br>
 			

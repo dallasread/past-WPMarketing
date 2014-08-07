@@ -45,7 +45,8 @@ Here's the next steps for WP Marketing:
 * landing page creator
 * livetracker
 * publish
-* hide from certain users
+* hide wpmarketing selected certain users
+* Installable app?
 
 == Changelog ==
 

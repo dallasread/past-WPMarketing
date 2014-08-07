@@ -37,6 +37,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+/*
+ini_set("display_errors",1);
+ini_set("display_startup_errors",1);
+error_reporting(-1);*/
+
+
 class WPMarketing
 {
   public static $wpmarketing_instance;
@@ -47,9 +53,7 @@ class WPMarketing
   }
 
   private function __construct() {
-    add_action( "admin_menu", array( $this, "menu_page" ) );
-		add_action( "admin_init", array( $this, "admin_footer" ) );
-		add_action( "wp_ajax_unlock", array( $this, "unlock" ) );
+		add_filter( "template_include", array( $this, "landing_pager_template_path") );
     register_uninstall_hook( __FILE__, array( $this, "uninstall" ) );
   }
   
@@ -63,6 +67,8 @@ class WPMarketing
   
   public static function admin_panel() {
 		global $wpmarketing;
+		global $just_activated;
+		
     WPMarketing::parse_params();
     $wpmarketing = WPMarketing::settings();
 		
@@ -79,11 +85,11 @@ class WPMarketing
 	
 	public static function admin_footer() {
 		wp_register_style( "wpmarketing_style", plugins_url("admin/css/style.css", __FILE__) );
-		wp_enqueue_style( "wpmarketing_style" );
+		wp_enqueue_style( array( "wpmarketing_style", "thickbox" ) );
 
 		wp_register_script( "wpmarketing_script", plugins_url("admin/js/admin.js", __FILE__) );
 		wp_register_script( "wpmarketing_landing_pager", plugins_url("admin/js/apps/landing_pager.js", __FILE__) );
-		wp_enqueue_script( array( "wpmarketing_landing_pager", "wpmarketing_script", "jquery" ) );
+		wp_enqueue_script( array( "wpmarketing_landing_pager", "wpmarketing_script", "thickbox", "jquery" ) );
 	}
   
   public static function uninstall() {
@@ -122,7 +128,7 @@ class WPMarketing
     if (isset($_POST["unlock_code"])) {
 			$unlock_code = trim($_POST["unlock_code"]);
       $request = new WP_Http;
-      $result = $request->request("http://guitarvid.com/activation/wpmarketing/activate.php?unlock_code=" . $unlock_code);
+      $result = $request->request("http://guitarvid.com/activation/wpmarketing/unlock.php?unlock_code=" . $unlock_code);
       $response = json_decode($result["body"]);
 			
 			if ($response->success == 1) {
@@ -136,34 +142,89 @@ class WPMarketing
   
   public static function parse_params() {
 		global $wpmarketing;
+		global $just_activated;
 		
     if (isset($_POST["email"]) && is_email($_POST["email"]) && isset($_POST["name"])) {
 			WPMarketing::settings( array(
 				"subscriber_name" => trim($_POST["name"]),
-				"subscriber_email" => sanitize_email($_POST["email"])
+				"subscriber_email" => sanitize_email(trim($_POST["email"]))
 			) );
+			$just_activated = true;
 		}
   }
-  
-  public static function footer() {
-    // $wpmarketing = WPMarketing::settings();
-    // 
-    // if ($wpmarketing["active"]) {
-    //   $wpmarketing_keys = array("api_key", "debug", "stylesheet");
-    //   $wpmarketing_options = "";
-    //   
-    //   foreach ($wpmarketing as $key => $value) {
-    //     if (in_array($key, $wpmarketing_keys) && !!$value) {
-    //       $wpmarketing_options .= " data-" . $key . "=\"" . $value . "\"";
-    //     }
-    //   }
-    // 
-    //   echo "<script src=\"" . plugins_url() . "/wpmarketing/WPMarketing.guru/tmp/0.0.1/WPMarketing-0.0.1.js\" id=\"cobrowser\"" . $wpmarketing_options . "></script>";
-    // }
-  }
+	
+	public static function landing_pager_template_path() {
+		global $post;
+
+		if ( !isset( $post ) ) return $template;
+		if ( get_post_meta( $post->ID, "_wp_page_template", true ) != "landing_pager_template.php" ) {
+			return $template;
+		}
+		
+		$file = plugin_dir_path( __FILE__ ) . "public/php/templates/landing_pager_template.php";
+		if( file_exists( $file ) ) { return $file; }
+		return $template;
+	}
+	
+	public static function create_landing_pager() {
+		$data = array("success" => false);
+		
+		$post = array(
+		  "post_title"    => $_POST["title"],
+			"post_name"			=> $_POST["name"],
+			"post_type"			=> "landing_page",
+		  "post_status"   => "draft"
+		);
+
+		$response = wp_insert_post( $post );
+		
+		if ($response != 0) {
+			$data["id"] = $response;
+			$data["success"] = true;
+			update_post_meta($data["id"], "_wp_page_template", "landing_pager_template.php");
+		}
+		
+		die(json_encode($data));
+	}
+	
+	public static function register_post_type() {
+    $labels = array(
+      "name"               => "Landing Pages",
+      "singular_name"      => "Landing Page",
+      "add_new"            => "Add New",
+      "add_new_item"       => "Add New Landing Page",
+      "edit_item"          => "Edit Landing Page",
+      "new_item"           => "New Landing Page",
+      "all_items"          => "All Landing Pages",
+      "view_item"          => "View Landing Page",
+      "search_items"       => "Search Landing Pages",
+      "not_found"          => "No Landing Pages found",
+      "not_found_in_trash" => "No Landing Pages found in Trash",
+      "parent_item_colon"  => "",
+      "menu_name"          => "Landing Pages"
+    );
+
+    $args = array(
+      "labels"             => $labels,
+      "public"             => true,
+      "publicly_queryable" => false,
+      "show_ui"            => true,
+      "show_in_menu"       => true,
+      "query_var"          => true,
+      "rewrite"            => array( "slug" => "/" ),
+      "capability_type"    => "page",
+      "has_archive"        => false,
+      "hierarchical"       => false,
+      "menu_position"      => null,
+      "supports"           => array( "title", "author", "comments", "revisions" )
+    );
+
+    register_post_type( "landing_page", $args );      
+    flush_rewrite_rules();
+	}
 }
 
-// WPMarketing::uninstall();
+//WPMarketing::uninstall();
 WPMarketing::init();
 
 ?>

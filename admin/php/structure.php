@@ -1,6 +1,7 @@
 <div class="wrap wpmarketing <?php if ($wpmarketing["unlock_code"] != "") { echo "un"; } ?>locked" data-plugins_url="<?php echo plugins_url("wpmarketing/"); ?>" data-unlock_code="<?php echo $wpmarketing["unlock_code"]; ?>">
 	
 	<?php require_once "header.php"; ?>
+	<?php require_once "remetric.php"; ?>
 	
 	<div class="main_wrapper">
 		<div class="home">

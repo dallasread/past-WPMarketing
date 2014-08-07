@@ -2,11 +2,11 @@ jQuery(function($) {
 	window.WPMarketing = {
 		plugins_url: $(".wpmarketing").data("plugins_url"),
 		unlock_code: $(".wpmarketing").data("unlock_code"),
-		unlocked: !!$(".wpmarketing").data("unlock_code").length,
+		unlocked: $(".wpmarketing").data("unlock_code") != "",
 		apps: {
 			landing_pager: {
 				name: "LandingPager",
-				description: "Only 3 Steps: Choose a template, Add your content, Publish.",
+				description: "Only 3 Steps: Choose a template, Add content, Publish.",
 				colour: "#AD3C2D",
 				installed: true,
 				premium: true
@@ -217,5 +217,7 @@ jQuery(function($) {
 		return false;
 	});
 	
-	window.WPMarketing.init();
+	if ($(".wpmarketing").length) {
+		window.WPMarketing.init();
+	}
 });
