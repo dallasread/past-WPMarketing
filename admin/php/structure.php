@@ -8,6 +8,7 @@
 		</div>
 		
 		<?php
+			require_once("apps/live_tracker.php");
 			require_once("apps/lead_generator.php");
 			require_once("apps/touch_base.php");
 			require_once("apps/supercharged_seo.php");

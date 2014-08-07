@@ -2,6 +2,7 @@
 	<div class="header"></div>
 	
 	<div class="content">
-		This is the app content
+		Action Bars, Pop Overs, and Widgets to boost conversions.<br><br>
+		LeadGenerator is coming soon!
 	</div>
 </div>

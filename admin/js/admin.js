@@ -4,14 +4,6 @@ jQuery(function($) {
 		unlock_code: $(".wpmarketing").data("unlock_code"),
 		unlocked: !!$(".wpmarketing").data("unlock_code").length,
 		apps: {
-			lead_generator: {
-				name: "LeadGenerator",
-				description: "Call-To-Actions, Autoresponders, and Analytics in one place.",
-				colour: "#0E8FAA",
-				installed: true,
-				premium: true,
-				notes: "Pop Over, Top bar, bottom right, right middle || Digital Downloads, Subscriptions, Polls, Surveys, Contact Form, Call Back, Appointment Booker, LivelyChat"
-			},
 			landing_pager: {
 				name: "LandingPager",
 				description: "Only 3 Steps: Choose a template, Add your content, Publish.",
@@ -19,33 +11,28 @@ jQuery(function($) {
 				installed: true,
 				premium: true
 			},
-			relevant_text: {
-				name: "RelevantText",
-				description: "Shortcodes to display relevant content to Googlers and Bingers.",
-				colour: "#3A3B99",
+			live_tracker: {
+				name: "LiveTracker",
+				description: "Find out how your visitors are interacting in real time.",
+				colour: "#0E8FAA",
 				installed: true,
-				premium: false
-			},
-			settings: {
-				name: "Settings",
-				description: "WP Marketing options and preferences across all your apps.",
-				colour: "#444444",
-				installed: true,
-				premium: false
-			},
-			upgrade: {
-				name: "Unlock All Apps",
-				description: "Get access to all WP Marketing apps (including new ones)!",
-				colour: "#5D1625",
-				installed: true,
-				premium: false
+				premium: true
 			},
 			touch_base: {
 				name: "TouchBase",
 				description: "A single helpdesk to respond to all your leads and contacts.",
-				colour: "#993066",
+				colour: "#BA3143",
 				installed: false,
-				premium: true
+				premium: true,
+				notes: "This should be renamed to SupportDesk, with TouchBase being reserved for followups."
+			},
+			lead_generator: {
+				name: "LeadGenerator",
+				description: "Action Bars, Pop Overs, and Widgets to boost conversions.",
+				colour: "#AB6600",
+				installed: false,
+				premium: true,
+				notes: "Pop Over, Top bar, bottom right, right middle || Digital Downloads, Subscriptions, Polls, Surveys, Contact Form, Call Back, Appointment Booker, LivelyChat"
 			},
 			supercharged_seo: {
 				name: "Supercharged SEO",
@@ -68,13 +55,27 @@ jQuery(function($) {
 			// 	installed: false,
 			// 	premium: true
 			// },
-			// ads_wizard: {
+			// themes: {
 			// 	name: "Themes",
 			// 	description: "Access to themes.",
 			// 	colour: "#AD4C22",
 			// 	installed: false,
 			// 	premium: true
 			// },
+			autosocializer: {
+				name: "AutoSocializer",
+				description: "Automatically have new posts announced via social media.",
+				colour: "#552A99",
+				installed: false,
+				premium: false
+			},
+			relevant_text: {
+				name: "RelevantText",
+				description: "Shortcodes to display relevant content to Googlers and Bingers.",
+				colour: "#3A3B99",
+				installed: false,
+				premium: false
+			},
 			integrations: {
 				name: "3rd-Party Integrations",
 				description: "Mailchimp, Aweber, GetResponse, Wufoo, etc.",
@@ -82,11 +83,18 @@ jQuery(function($) {
 				installed: false,
 				premium: true
 			},
-			autosocializer: {
-				name: "AutoSocializer",
-				description: "Automatically have new posts announced via social media.",
-				colour: "#723C99",
-				installed: false,
+			upgrade: {
+				name: "Unlock All Apps",
+				description: "Get access to all WP Marketing apps (including new ones)!",
+				colour: "#5D1625",
+				installed: true,
+				premium: false
+			},
+			settings: {
+				name: "Settings",
+				description: "WP Marketing options and preferences across all your apps.",
+				colour: "#444444",
+				installed: true,
 				premium: false
 			}
 		},

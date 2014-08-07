@@ -130,6 +130,10 @@
 	padding: 20px;
 }
 
+.app .content.no_padding {
+	padding: 0px;
+}
+
 .app .content .narrow_content {
 	max-width: 500px;
 	margin: 0 auto;
@@ -258,7 +262,40 @@
 
 .wpmarketing .topbar {
 	background: #eee;
-	margin: -20px;
-	padding: 10px;
+	padding: 13px;
 	border-bottom: 1px solid #ddd;
+	text-align: center;
+}
+
+.wpmarketing .topbar .left_of_topbar {
+	float: left;
+}
+
+.wpmarketing .topbar .right_of_topbar {
+	float: right;
+}
+
+.wpmarketing_clear {
+	clear: both;
+}
+
+.wpmarketing .content .editor {
+	border-left: 1px solid #ddd;	
+	margin-left: 170px;
+	min-height: 500px;
+}
+
+.wpmarketing .content .sidebar {
+	width: 170px;
+	position: absolute;
+	background: #fff;
+}
+
+.wpmarketing .content .sidebar .widgets {
+	margin: 0;
+}
+
+.wpmarketing .content .sidebar .widgets a {
+	padding: 3px 10px;
+	display: block;
 }
