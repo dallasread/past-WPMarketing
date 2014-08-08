@@ -23,8 +23,8 @@ jQuery(function($) {
 			lead_generator: {
 				name: "LeadGenerator",
 				description: "Action Bars, Pop Overs, and Widgets to boost conversions.",
-				colour: "#BA3143",
-				installed: false,
+				colour: "#0F6F4B",
+				installed: true,
 				premium: true,
 				notes: "Pop Over, Top bar, bottom right, right middle || Digital Downloads, Subscriptions, Polls, Surveys, Contact Form, Call Back, Appointment Booker, LivelyChat"
 			},
@@ -39,7 +39,7 @@ jQuery(function($) {
 			supercharged_seo: {
 				name: "Supercharged SEO",
 				description: "Dynamic, tailored optimizations for #1 ranking results.",
-				colour: "#0F6F4B",
+				colour: "#297971",
 				installed: false,
 				premium: true
 			},
@@ -53,9 +53,9 @@ jQuery(function($) {
 			ads_wizard: {
 				name: "Ads Wizard",
 				description: "Step-by-step ad writing and publishing walkthrough.",
-				colour: "#3A3B99",
-				installed: true,
-				premium: true
+				colour: "#BA3143",
+				installed: false,
+				premium: false
 			},
 			// easyshare_buttons: {
 			// 	name: "EasyShare Buttons",
@@ -78,10 +78,17 @@ jQuery(function($) {
 			// 	installed: false,
 			// 	premium: false
 			// },
+			simple_segment: {
+				name: "SimpleSegment",
+				description: "Group your contacts into segments for super-effective targeting.",
+				colour: "#3A3B99",
+				installed: false,
+				premium: false
+			},
 			integrations: {
 				name: "3rd-Party Integrations",
 				description: "Mailchimp, Aweber, GetResponse, Wufoo, etc.",
-				colour: "#297971",
+				colour: "#AD4C22",
 				installed: false,
 				premium: true
 			},
