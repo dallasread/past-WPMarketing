@@ -42,7 +42,7 @@
 		
 		<div class="wpmarketing_clear"></div>
 		
-		<div class="editor_wrapper">
+		<div class="app_panes with_sidebar">
 			
 			<div class="sidebar">
 				<ul class="widgets">
@@ -61,7 +61,7 @@
 				</ul>
 			</div>
 			
-			<div class="editor">
+			<div class="pane">
 			</div>
 			
 		</div>

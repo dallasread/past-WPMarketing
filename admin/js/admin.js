@@ -16,29 +16,45 @@ jQuery(function($) {
 				description: "Find out how your visitors are interacting in real time.",
 				colour: "#0E8FAA",
 				installed: true,
-				premium: true
-			},
-			touch_base: {
-				name: "TouchBase",
-				description: "A single helpdesk to respond to all your leads and contacts.",
-				colour: "#BA3143",
-				installed: false,
 				premium: true,
-				notes: "This should be renamed to SupportDesk, with TouchBase being reserved for followups."
+				initializer: window.LiveTracker.init,
+				destroyer: window.LiveTracker.pause
 			},
 			lead_generator: {
 				name: "LeadGenerator",
 				description: "Action Bars, Pop Overs, and Widgets to boost conversions.",
-				colour: "#AB6600",
+				colour: "#BA3143",
 				installed: false,
 				premium: true,
 				notes: "Pop Over, Top bar, bottom right, right middle || Digital Downloads, Subscriptions, Polls, Surveys, Contact Form, Call Back, Appointment Booker, LivelyChat"
+			},
+			touch_base: {
+				name: "TouchBase",
+				description: "A single helpdesk to respond to all your leads and contacts.",
+				colour: "#AB6600",
+				installed: false,
+				premium: true,
+				notes: "This should be renamed to SupportDesk, with TouchBase being reserved for followups."
 			},
 			supercharged_seo: {
 				name: "Supercharged SEO",
 				description: "Dynamic, tailored optimizations for #1 ranking results.",
 				colour: "#0F6F4B",
 				installed: false,
+				premium: true
+			},
+			autosocializer: {
+				name: "AutoSocializer",
+				description: "Automatically have new posts announced via social media.",
+				colour: "#552A99",
+				installed: false,
+				premium: false
+			},
+			ads_wizard: {
+				name: "Ads Wizard",
+				description: "Step-by-step ad writing and publishing walkthrough.",
+				colour: "#3A3B99",
+				installed: true,
 				premium: true
 			},
 			// easyshare_buttons: {
@@ -48,13 +64,6 @@ jQuery(function($) {
 			// 	installed: false,
 			// 	premium: false
 			// },
-			// ads_wizard: {
-			// 	name: "Ads Wizard",
-			// 	description: "Step-by-step ad writing and publishing walkthrough.",
-			// 	colour: "#AD4C22",
-			// 	installed: false,
-			// 	premium: true
-			// },
 			// themes: {
 			// 	name: "Themes",
 			// 	description: "Access to themes.",
@@ -62,20 +71,13 @@ jQuery(function($) {
 			// 	installed: false,
 			// 	premium: true
 			// },
-			autosocializer: {
-				name: "AutoSocializer",
-				description: "Automatically have new posts announced via social media.",
-				colour: "#552A99",
-				installed: false,
-				premium: false
-			},
-			relevant_text: {
-				name: "RelevantText",
-				description: "Shortcodes to display relevant content to Googlers and Bingers.",
-				colour: "#3A3B99",
-				installed: false,
-				premium: false
-			},
+			// relevant_text: {
+			// 	name: "RelevantText",
+			// 	description: "Shortcodes to display relevant content to Googlers and Bingers.",
+			// 	colour: "#3A3B99",
+			// 	installed: false,
+			// 	premium: false
+			// },
 			integrations: {
 				name: "3rd-Party Integrations",
 				description: "Mailchimp, Aweber, GetResponse, Wufoo, etc.",
@@ -100,6 +102,9 @@ jQuery(function($) {
 		},
 	
 		setApp: function (namespace) {
+			var old_app = window.WPMarketing.apps[$(".wpmarketing .app:visible").data("app")];
+			if (typeof old_app != "undefined" && typeof old_app.destroyer == "function") { old_app.destroyer(); }
+			
 			if (namespace == "home") {
 				$(".wpmarketing .home").show(0);
 				$(".wpmarketing .app").hide();
@@ -123,8 +128,9 @@ jQuery(function($) {
 					"background-color": app.colour,
 					"border-color": app.colour
 				});
-	
+				
 				$("html, body").scrollTop(0);
+				app.initializer();
 			}
 		},
 		

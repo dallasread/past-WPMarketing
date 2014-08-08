@@ -1,5 +1,4 @@
 <?php
-
 /*
 
 Plugin Name: WP Marketing
@@ -53,7 +52,16 @@ class WPMarketing
   }
 
   private function __construct() {
+		add_action( "init", array( $this, "register_post_type" ) );
+    add_action( "admin_menu", array( $this, "menu_page" ) );
+		add_action( "admin_init", array( $this, "admin_footer" ) );
 		add_filter( "template_include", array( $this, "landing_pager_template_path") );
+		
+		add_action( "wp_ajax_unlock", array( $this, "unlock" ) );
+		add_action( "wp_ajax_create_landing_pager", array( $this, "create_landing_pager" ) );
+		add_action( "wp_ajax_live_tracker_status", array( $this, "live_tracker_status" ) );
+		add_action( "wp_ajax_live_tracker_poll", array( $this, "live_tracker_poll" ) );
+		
     register_uninstall_hook( __FILE__, array( $this, "uninstall" ) );
   }
   
@@ -88,8 +96,11 @@ class WPMarketing
 		wp_enqueue_style( array( "wpmarketing_style", "thickbox" ) );
 
 		wp_register_script( "wpmarketing_script", plugins_url("admin/js/admin.js", __FILE__) );
+		wp_register_script( "mustache", plugins_url("admin/js/vendor/mustache.js", __FILE__) );
 		wp_register_script( "wpmarketing_landing_pager", plugins_url("admin/js/apps/landing_pager.js", __FILE__) );
-		wp_enqueue_script( array( "wpmarketing_landing_pager", "wpmarketing_script", "thickbox", "jquery" ) );
+		wp_register_script( "wpmarketing_live_tracker", plugins_url("admin/js/apps/live_tracker.js", __FILE__) );
+		
+		wp_enqueue_script( array( "wpmarketing_landing_pager", "wpmarketing_live_tracker", "wpmarketing_script", "mustache", "thickbox", "jquery" ) );
 	}
   
   public static function uninstall() {
@@ -109,7 +120,8 @@ class WPMarketing
 				"website" => $_SERVER["SERVER_NAME"],
 	      "unlock_code" => "",
 	      "subscriber_name" => "",
-	      "subscriber_email" => ""
+	      "subscriber_email" => "",
+				"live_tracker_status" => "on"
 	    );
 			
 			if (!empty($update) || $wpmarketing != $settings) {
@@ -153,16 +165,20 @@ class WPMarketing
 		}
   }
 	
-	public static function landing_pager_template_path() {
+	/*
+		Landing Pager
+	*/
+	
+	public static function landing_pager_template_path($template) {
 		global $post;
 
-		if ( !isset( $post ) ) return $template;
-		if ( get_post_meta( $post->ID, "_wp_page_template", true ) != "landing_pager_template.php" ) {
-			return $template;
+		if ( !isset( $post ) ) { return $template; }
+		
+		if ( get_post_meta( $post->ID, "_wp_page_template", true ) == "landing_pager_template.php" ) {
+			$file = plugin_dir_path( __FILE__ ) . "public/php/templates/landing_pager_template.php";
+			if( file_exists( $file ) ) { return $file; }
 		}
 		
-		$file = plugin_dir_path( __FILE__ ) . "public/php/templates/landing_pager_template.php";
-		if( file_exists( $file ) ) { return $file; }
 		return $template;
 	}
 	
@@ -188,39 +204,83 @@ class WPMarketing
 	}
 	
 	public static function register_post_type() {
-    $labels = array(
-      "name"               => "Landing Pages",
-      "singular_name"      => "Landing Page",
-      "add_new"            => "Add New",
-      "add_new_item"       => "Add New Landing Page",
-      "edit_item"          => "Edit Landing Page",
-      "new_item"           => "New Landing Page",
-      "all_items"          => "All Landing Pages",
-      "view_item"          => "View Landing Page",
-      "search_items"       => "Search Landing Pages",
-      "not_found"          => "No Landing Pages found",
-      "not_found_in_trash" => "No Landing Pages found in Trash",
-      "parent_item_colon"  => "",
-      "menu_name"          => "Landing Pages"
-    );
-
+		
     $args = array(
-      "labels"             => $labels,
+      "labels"             => array(
+	      "name"               => "Landing Pages",
+	      "singular_name"      => "Landing Page"
+	    ),
       "public"             => true,
-      "publicly_queryable" => false,
-      "show_ui"            => true,
-      "show_in_menu"       => true,
-      "query_var"          => true,
-      "rewrite"            => array( "slug" => "/" ),
+      "publicly_queryable" => true,
+      "show_ui"            => true, //false
+      "show_in_menu"       => true, //false
+      "query_var"          => "landing_page",
+      "rewrite"            => false,
       "capability_type"    => "page",
       "has_archive"        => false,
       "hierarchical"       => false,
       "menu_position"      => null,
-      "supports"           => array( "title", "author", "comments", "revisions" )
+      "supports"           => array( "title", "author", "comments" )
     );
-
+		
+		
     register_post_type( "landing_page", $args );      
+		add_rewrite_rule('(.+?)/', 'index.php?landing_page=$matches[1]', 'guru');
     flush_rewrite_rules();
+		flush_rewrite_rules();
+	}
+	
+	/*
+		LiveTracker
+	*/
+	
+	public static function live_tracker_status() {
+		global $wpmarketing;
+		
+    $data = WPMarketing::settings( array(
+			"live_tracker_status" => $_POST["live_tracker_status"] == "off" ? "off" : "on",
+			"success" => true
+		) );
+		
+		die(json_encode($data));
+	}
+	
+	public static function live_tracker_poll() {
+		global $wpmarketing;
+		
+    $data = array();
+		$dallas = array(
+			"id" => 12,
+			"description" => "submitted a form for adding to a company",
+			"contact" => array(
+				"name" => "Dallas Read",
+				"avatar" => "http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+				"os" => "apple",
+				"browser" => "chrome",
+				"country_code" => "ca",
+				"latitude" => "-10",
+				"longitude" => "110",
+				"ip" => "0.1.2.3"
+			)
+		);
+		$luke = array(
+			"id" => 15,
+			"description" => "clicked on a button",
+			"contact" => array(
+				"name" => "Lucky Luke",
+				"avatar" => "http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
+				"os" => "windows",
+				"browser" => "ie",
+				"country_code" => "sa",
+				"latitude" => "30",
+				"longitude" => "10",
+				"ip" => "0.1.2.3"
+			)
+		);
+			
+		array_push($data, $dallas, $luke);
+		
+		die(json_encode($data));
 	}
 }
 

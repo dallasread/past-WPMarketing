@@ -38,13 +38,38 @@ sdfsadf
 
 == Feature Suggestions ==
 
-Here's the next steps for WP Marketing:
+Here are the next things on the list for WP Marketing:
 
-* add to remetric
-* by using wp marketing, you're signing up...
-* landing page creator
-* livetracker
+* livetracker (to track clicks and submits)
+	* turn app on/off
+	* db migrations
+	* contacts table
+		* id
+		* user_id
+		* cookie
+		* data
+	* events table
+		* id
+		* contact_id
+		* form_id
+		* verb
+		* data
+	* when new visitor, add cookie and save
+		* if logged in, find or create contact record for current_user_id
+			* if found and already has cookie, change to their cookie
+		* if not logged in, create new record
+			* grab ip address, geo, and other info
+	* newsfeed
+		* loading state
+		* poll on load (show last 5 events)
+		* poll every 30 seconds and display events sporadically
+	
+* landing page creator with premium analytics
+* lead generator
+* update sequence
 * publish
+* announce it everywhere
+
 * hide wpmarketing selected certain users
 * Installable app?
 

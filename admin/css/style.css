@@ -162,6 +162,34 @@
 	text-shadow: 1px 1px 2px #E18C1E;
 }
 
+.button.green, .button.green:hover, .live_tracker_status.on, .live_tracker_status.on:hover {
+	background: #6acc6d;
+	background: -moz-linear-gradient(top,  #6acc6d 0%, #62bc68 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6acc6d), color-stop(100%,#62bc68));
+	background: -webkit-linear-gradient(top,  #6acc6d 0%,#62bc68 100%);
+	background: -o-linear-gradient(top,  #6acc6d 0%,#62bc68 100%);
+	background: -ms-linear-gradient(top,  #6acc6d 0%,#62bc68 100%);
+	background: linear-gradient(to bottom,  #6acc6d 0%,#62bc68 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6acc6d', endColorstr='#62bc68',GradientType=0 );
+	border-color: #2E9033;
+	box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+	text-shadow: 1px 1px 2px #2E9033;
+}
+
+.button.red, .button.red:hover, .live_tracker_status.off, .live_tracker_status.off:hover {
+	background: #d32a2a;
+	background: -moz-linear-gradient(top,  #d32a2a 1%, #a52121 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#d32a2a), color-stop(100%,#a52121));
+	background: -webkit-linear-gradient(top,  #d32a2a 1%,#a52121 100%);
+	background: -o-linear-gradient(top,  #d32a2a 1%,#a52121 100%);
+	background: -ms-linear-gradient(top,  #d32a2a 1%,#a52121 100%);
+	background: linear-gradient(to bottom,  #d32a2a 1%,#a52121 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d32a2a', endColorstr='#a52121',GradientType=0 );
+	border-color: #871A1A;
+	box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.3);
+	text-shadow: 1px 1px 2px #871A1A;
+}
+
 .button_wrapper {
 	text-align: center;
 	margin: 40px 0; 
@@ -267,6 +295,39 @@
 	text-align: center;
 }
 
+.wpmarketing .topbar .topbar_nav {
+	margin: -13px;
+}
+
+.wpmarketing .topbar .topbar_nav li {
+	float: left;
+	margin-bottom: -13px;
+}
+
+.wpmarketing .topbar .topbar_nav li a {
+	color: #444;
+	display: inline-block;
+	text-decoration: none;
+	font-size: 15px;
+	padding: 19px 20px;
+	border-right: 1px solid transparent;
+	border-left: 1px solid transparent;
+}
+
+.wpmarketing .topbar .left_of_topbar .topbar_nav li:first-child a {
+	border-left: 0;
+}
+
+.wpmarketing .topbar .right_of_topbar .topbar_nav li:last-child a {
+	border-right: 0;
+}
+
+.wpmarketing .topbar .topbar_nav li a.selected {
+	font-weight: bold;
+	background: #fff;
+	border-color: #ddd;
+}
+
 .wpmarketing .topbar .left_of_topbar {
 	float: left;
 }
@@ -279,23 +340,94 @@
 	clear: both;
 }
 
-.wpmarketing .content .editor {
+.wpmarketing .content .app_panes .pane {
+	min-height: 500px;
+	border-radius: 0 0 10px 0;
+}
+
+.wpmarketing .content .app_panes.with_sidebar .pane {
 	border-left: 1px solid #ddd;	
 	margin-left: 170px;
 	min-height: 500px;
 }
 
-.wpmarketing .content .sidebar {
+.wpmarketing .content .app_panes.with_sidebar .sidebar {
 	width: 170px;
 	position: absolute;
 	background: #fff;
 }
 
-.wpmarketing .content .sidebar .widgets {
+.wpmarketing .content .app_panes.with_sidebar.with_wide_sidebar .pane {
+	margin-left: 230px;
+}
+
+.wpmarketing .content .app_panes.with_sidebar.with_wide_sidebar .sidebar {
+	width: 230px;
+}
+
+.wpmarketing .content .app_panes.with_sidebar .sidebar .widgets {
 	margin: 0;
 }
 
-.wpmarketing .content .sidebar .widgets a {
+.wpmarketing .content .app_panes.with_sidebar .sidebar .widgets a {
 	padding: 3px 10px;
 	display: block;
+}
+
+#live_tracker_map {
+	width: 100%;
+	height: 500px;
+	border-radius: 0 0 10px 0;
+}
+
+.wpmarketing .content .app_panes.with_sidebar .sidebar .newsfeed {
+	height: 500px;
+	overflow-y: auto;
+	margin: 0;
+}
+
+.wpmarketing .content .app_panes.with_sidebar .sidebar .newsfeed li {
+	border-bottom: 1px solid #ddd;
+	padding: 8px;
+	margin: 0;
+}
+
+.wpmarketing .content .app_panes.with_sidebar .sidebar .newsfeed li.loading {
+	text-align: center;
+	padding: 30px;
+}
+
+.wpmarketing .content .app_panes.with_sidebar .sidebar .newsfeed li.loading img {
+	margin-bottom: 20px;
+}
+
+.wpmarketing .content .app_panes.with_sidebar .sidebar .newsfeed .avatar {
+	float: left;
+	display: block;
+	width: 26%;
+}
+
+.wpmarketing .content .app_panes.with_sidebar .sidebar .newsfeed .profile_imgs {
+	float: right;
+	margin-top: 5px;
+}
+
+.wpmarketing .content .app_panes.with_sidebar .sidebar .newsfeed .profile_imgs img {
+	width: 12px;
+	margin-left: 5px;
+}
+
+.wpmarketing .content .app_panes.with_sidebar .sidebar .newsfeed .description {
+	width: 74%;
+	float: right;
+	padding-left: 10px;
+}
+
+.wpmarketing .content .app_panes.with_sidebar .sidebar .newsfeed .description {
+	margin: 0;
+	font-size: 11px;
+}
+
+.wpmarketing .live_tracker_status.on .off_text, .wpmarketing .live_tracker_status.off .on_text {
+	display: none;
 }
