@@ -431,3 +431,7 @@
 .wpmarketing .live_tracker_status.on .off_text, .wpmarketing .live_tracker_status.off .on_text {
 	display: none;
 }
+
+.wpmarketing .logo {
+	width: 200px;
+}

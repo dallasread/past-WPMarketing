@@ -4,5 +4,6 @@
 	<p class="cta">Welcome back!</p>
 <?php } ?>
 
-<h2>WP Marketing</h2>
-<p class="wpmarketing_desc">Boost your website's audience.</p>
+<h2>
+	<img src="<?php echo plugins_url("wpmarketing/admin/imgs/logo_black.png"); ?>" class="logo">
+</h2>

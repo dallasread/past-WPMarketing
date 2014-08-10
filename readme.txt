@@ -40,37 +40,51 @@ sdfsadf
 
 Here are the next things on the list for WP Marketing:
 
+* lead generator UI
+	* Styles
+		* Pop Over
+		* Top bar
+		* Bottom bar
+		* bottom right dialog
+		* bottom left dialog
+	* Actions
+		* Text
+		* Digital Download
+		* Subscription
+		* Polls
+		* Social likes
+		* Surveys
+		* Contact Form
+		* Call Back
+		* Appointment Booker
+		* LivelyChat
+
 * livetracker (to track clicks and submits)
-	* turn app on/off
-	* db migrations
-	* contacts table
-		* id
-		* user_id
-		* cookie
-		* data
-	* events table
-		* id
-		* contact_id
-		* form_id
-		* verb
-		* data
+	* add tables
+		* contacts table
+			* id
+			* user_id
+			* cookie
+			* data
+		* events table
+			* id
+			* contact_id
+			* form_id
+			* verb
+			* data
+	* add route for image detection
 	* when new visitor, add cookie and save
 		* if logged in, find or create contact record for current_user_id
 			* if found and already has cookie, change to their cookie
 		* if not logged in, create new record
 			* grab ip address, geo, and other info
-	* newsfeed
-		* loading state
-		* poll on load (show last 5 events)
-		* poll every 30 seconds and display events sporadically
 	
 * landing page creator with premium analytics
-* lead generator
 * update sequence
 * publish
 * announce it everywhere
 
-* hide wpmarketing selected certain users
+* hide wpmarketing from selected certain users
 * Installable app?
 
 == Changelog ==

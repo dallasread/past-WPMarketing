@@ -25,8 +25,7 @@ jQuery(function($) {
 				description: "Action Bars, Pop Overs, and Widgets to boost conversions.",
 				colour: "#0F6F4B",
 				installed: true,
-				premium: true,
-				notes: "Pop Over, Top bar, bottom right, right middle || Digital Downloads, Subscriptions, Polls, Surveys, Contact Form, Call Back, Appointment Booker, LivelyChat"
+				premium: true
 			},
 			touch_base: {
 				name: "TouchBase",
