@@ -1,4 +1,4 @@
-<div class="app" data-app="live_tracker">
+<div class="app" data-app="convert_alert">
 	<div class="header"></div>
 	
 	<div class="content no_padding">
@@ -10,9 +10,9 @@
 			</div>
 			
 			<div class="right_of_topbar">
-				<a href="#" class="button button-primary button-large live_tracker_status <?php echo $wpmarketing["live_tracker_status"]; ?>">
-					<span class="on_text">LiveTracker is ON</span>
-					<span class="off_text">LiveTracker is OFF</span>
+				<a href="#" class="button button-primary button-large convert_alert_status <?php echo $wpmarketing["convert_alert_status"]; ?>">
+					<span class="on_text">ConvertAlert is ON</span>
+					<span class="off_text">ConvertAlert is OFF</span>
 				</a>
 			</div>
 			
@@ -31,14 +31,14 @@
 			</div>
 			
 			<div class="pane">
-				<div id="live_tracker_map"></div>
+				<div id="convert_alert_map"></div>
 			</div>
 			
 		</div>
 	</div>
 </div>
 
-<script id="wpmarketing_live_tracker_event_template" type="x-tmpl-mustache">
+<script id="wpmarketing_convert_alert_event_template" type="x-tmpl-mustache">
 	<li data-latitude="{{ latitude }}" data-longitude="{{ longitude }}">
 		<img src="{{ contact.avatar }}" class="avatar">
 	

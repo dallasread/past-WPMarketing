@@ -1,4 +1,4 @@
-<div class="app" data-app="landing_pager">
+<div class="app" data-app="sway_page">
 	<div class="header"></div>
 	
 	<div class="content no_padding">
@@ -22,7 +22,7 @@
 						
 					?>
 				</select> &nbsp; &nbsp; 
-				<a href="#" class="button new_landing_pager">New Landing Page</a>
+				<a href="#" class="button new_sway_page">New Landing Page</a>
 			</div>
 			
 			<div class="right_of_topbar">
@@ -70,8 +70,8 @@
 </div>
 
 <div style="display: none; ">
-	<div id="new_landing_pager_thickbox">
-		<form class="create_landing_pager">
+	<div id="new_sway_page_thickbox">
+		<form class="create_sway_page">
 			<div class="field">
 				<label>
 					Landing Page Name:<br>

@@ -162,7 +162,7 @@
 	text-shadow: 1px 1px 2px #E18C1E;
 }
 
-.button.green, .button.green:hover, .live_tracker_status.on, .live_tracker_status.on:hover {
+.button.green, .button.green:hover, .convert_alert_status.on, .convert_alert_status.on:hover {
 	background: #6acc6d;
 	background: -moz-linear-gradient(top,  #6acc6d 0%, #62bc68 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6acc6d), color-stop(100%,#62bc68));
@@ -176,7 +176,7 @@
 	text-shadow: 1px 1px 2px #2E9033;
 }
 
-.button.red, .button.red:hover, .live_tracker_status.off, .live_tracker_status.off:hover {
+.button.red, .button.red:hover, .convert_alert_status.off, .convert_alert_status.off:hover {
 	background: #d32a2a;
 	background: -moz-linear-gradient(top,  #d32a2a 1%, #a52121 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#d32a2a), color-stop(100%,#a52121));
@@ -374,7 +374,7 @@
 	display: block;
 }
 
-#live_tracker_map {
+#convert_alert_map {
 	width: 100%;
 	height: 500px;
 	border-radius: 0 0 10px 0;
@@ -428,7 +428,7 @@
 	font-size: 11px;
 }
 
-.wpmarketing .live_tracker_status.on .off_text, .wpmarketing .live_tracker_status.off .on_text {
+.wpmarketing .convert_alert_status.on .off_text, .wpmarketing .convert_alert_status.off .on_text {
 	display: none;
 }
 

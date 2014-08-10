@@ -47,6 +47,7 @@ Here are the next things on the list for WP Marketing:
 		* Bottom bar
 		* bottom right dialog
 		* bottom left dialog
+		* inline (with shortcode or sidebar)
 	* Actions
 		* Text
 		* Digital Download
@@ -58,6 +59,13 @@ Here are the next things on the list for WP Marketing:
 		* Call Back
 		* Appointment Booker
 		* LivelyChat
+	* New Form
+		* UNCHANGEABLE: What do you want to create (from Actions)?
+		* Which pages should this (not) appear on? Which dates?
+		* Use my own CSS checkbox
+		* What will you name it?
+		* When should we show? Once per visitor per week? Ignore other widgets? On scroll?
+	* Preview & Editor
 
 * livetracker (to track clicks and submits)
 	* add tables

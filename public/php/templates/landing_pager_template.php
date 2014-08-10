@@ -4,12 +4,12 @@
 		<title><?php the_title(); ?></title>
 		<?php wp_head(); ?>
 		<style type="text/css" media="screen">
-			.landing_pager {
+			.sway_page {
 				background: red;
 			}
 		</style>
 	</head>
-	<body class="landing_pager">
+	<body class="sway_page">
 		<p>
 			BOOM!
 		</p>

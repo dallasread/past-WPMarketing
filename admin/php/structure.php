@@ -9,11 +9,11 @@
 		</div>
 		
 		<?php
-			require_once("apps/live_tracker.php");
-			require_once("apps/lead_generator.php");
+			require_once("apps/convert_alert.php");
+			require_once("apps/lead_generators.php");
 			require_once("apps/touch_base.php");
 			require_once("apps/supercharged_seo.php");
-			require_once("apps/landing_pager.php");
+			require_once("apps/sway_page.php");
 			require_once("apps/easyshare_buttons.php");
 			require_once("apps/relevant_text.php");
 			require_once("apps/ads_wizard.php");
@@ -24,3 +24,15 @@
 		?>
 	</div>
 </div>
+
+<?php if (isset($_REQUEST["nowp"])) { ?>
+	<script type="text/javascript">
+		jQuery(function($) {
+			$("#wpadminbar, #adminmenuwrap, #adminmenuback, #wpfooter").hide();
+			$("#wpwrap, .wrap").css("margin", 0);
+			$("#wpcontent").css("margin", "-40px 0 0 0")
+			$("#wpbody-content").css("padding-bottom", 0);
+			$(".wrap").css("padding", "10px")
+		});
+	</script>
+<?php } ?>

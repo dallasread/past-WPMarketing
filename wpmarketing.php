@@ -55,12 +55,12 @@ class WPMarketing
 		add_action( "init", array( $this, "register_post_type" ) );
     add_action( "admin_menu", array( $this, "menu_page" ) );
 		add_action( "admin_init", array( $this, "admin_footer" ) );
-		add_filter( "template_include", array( $this, "landing_pager_template_path") );
+		add_filter( "template_include", array( $this, "sway_page_template_path") );
 		
 		add_action( "wp_ajax_unlock", array( $this, "unlock" ) );
-		add_action( "wp_ajax_create_landing_pager", array( $this, "create_landing_pager" ) );
-		add_action( "wp_ajax_live_tracker_status", array( $this, "live_tracker_status" ) );
-		add_action( "wp_ajax_live_tracker_poll", array( $this, "live_tracker_poll" ) );
+		add_action( "wp_ajax_create_sway_page", array( $this, "create_sway_page" ) );
+		add_action( "wp_ajax_convert_alert_status", array( $this, "convert_alert_status" ) );
+		add_action( "wp_ajax_convert_alert_poll", array( $this, "convert_alert_poll" ) );
 		
     register_uninstall_hook( __FILE__, array( $this, "uninstall" ) );
   }
@@ -97,10 +97,10 @@ class WPMarketing
 
 		wp_register_script( "wpmarketing_script", plugins_url("admin/js/admin.js", __FILE__) );
 		wp_register_script( "mustache", plugins_url("admin/js/vendor/mustache.js", __FILE__) );
-		wp_register_script( "wpmarketing_landing_pager", plugins_url("admin/js/apps/landing_pager.js", __FILE__) );
-		wp_register_script( "wpmarketing_live_tracker", plugins_url("admin/js/apps/live_tracker.js", __FILE__) );
+		wp_register_script( "wpmarketing_sway_page", plugins_url("admin/js/apps/sway_page.js", __FILE__) );
+		wp_register_script( "wpmarketing_convert_alert", plugins_url("admin/js/apps/convert_alert.js", __FILE__) );
 		
-		wp_enqueue_script( array( "wpmarketing_landing_pager", "wpmarketing_live_tracker", "wpmarketing_script", "mustache", "thickbox", "jquery" ) );
+		wp_enqueue_script( array( "wpmarketing_sway_page", "wpmarketing_convert_alert", "wpmarketing_script", "mustache", "thickbox", "jquery" ) );
 	}
   
   public static function uninstall() {
@@ -121,7 +121,7 @@ class WPMarketing
 	      "unlock_code" => "",
 	      "subscriber_name" => "",
 	      "subscriber_email" => "",
-				"live_tracker_status" => "on"
+				"convert_alert_status" => "on"
 	    );
 			
 			if (!empty($update) || $wpmarketing != $settings) {
@@ -169,20 +169,20 @@ class WPMarketing
 		Landing Pager
 	*/
 	
-	public static function landing_pager_template_path($template) {
+	public static function sway_page_template_path($template) {
 		global $post;
 
 		if ( !isset( $post ) ) { return $template; }
 		
-		if ( get_post_meta( $post->ID, "_wp_page_template", true ) == "landing_pager_template.php" ) {
-			$file = plugin_dir_path( __FILE__ ) . "public/php/templates/landing_pager_template.php";
+		if ( get_post_meta( $post->ID, "_wp_page_template", true ) == "sway_page_template.php" ) {
+			$file = plugin_dir_path( __FILE__ ) . "public/php/templates/sway_page_template.php";
 			if( file_exists( $file ) ) { return $file; }
 		}
 		
 		return $template;
 	}
 	
-	public static function create_landing_pager() {
+	public static function create_sway_page() {
 		$data = array("success" => false);
 		
 		$post = array(
@@ -197,7 +197,7 @@ class WPMarketing
 		if ($response != 0) {
 			$data["id"] = $response;
 			$data["success"] = true;
-			update_post_meta($data["id"], "_wp_page_template", "landing_pager_template.php");
+			update_post_meta($data["id"], "_wp_page_template", "sway_page_template.php");
 		}
 		
 		die(json_encode($data));
@@ -231,21 +231,21 @@ class WPMarketing
 	}
 	
 	/*
-		LiveTracker
+		ConvertAlert
 	*/
 	
-	public static function live_tracker_status() {
+	public static function convert_alert_status() {
 		global $wpmarketing;
 		
     $data = WPMarketing::settings( array(
-			"live_tracker_status" => $_POST["live_tracker_status"] == "off" ? "off" : "on",
+			"convert_alert_status" => $_POST["convert_alert_status"] == "off" ? "off" : "on",
 			"success" => true
 		) );
 		
 		die(json_encode($data));
 	}
 	
-	public static function live_tracker_poll() {
+	public static function convert_alert_poll() {
 		global $wpmarketing;
 		
     $data = array();

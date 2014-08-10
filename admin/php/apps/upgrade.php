@@ -65,9 +65,9 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>$99 / year</td>
-							<td style="background: #fff; ">$199 / year</td>
-							<td>$299 / year</td>
+							<td>$29 / month</td>
+							<td style="background: #fff; ">$49 / year</td>
+							<td>$99 / month</td>
 						</tr>
 						<tr>
 							<td>1 Site</td>

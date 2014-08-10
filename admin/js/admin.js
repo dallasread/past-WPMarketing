@@ -4,24 +4,24 @@ jQuery(function($) {
 		unlock_code: $(".wpmarketing").data("unlock_code"),
 		unlocked: $(".wpmarketing").data("unlock_code") != "",
 		apps: {
-			landing_pager: {
-				name: "LandingPager",
-				description: "Only 3 Steps: Choose a template, Add content, Publish.",
+			sway_page: {
+				name: "SwayPage",
+				description: "3-Step, high-converting landing pages that are built to persuade.",
 				colour: "#AD3C2D",
 				installed: true,
 				premium: true
 			},
-			live_tracker: {
-				name: "LiveTracker",
+			convert_alert: {
+				name: "ConvertAlert",
 				description: "Find out how your visitors are interacting in real time.",
 				colour: "#0E8FAA",
 				installed: true,
 				premium: true,
-				initializer: window.LiveTracker.init,
-				destroyer: window.LiveTracker.pause
+				initializer: window.ConvertAlert.init,
+				destroyer: window.ConvertAlert.pause
 			},
-			lead_generator: {
-				name: "LeadGenerator",
+			lead_generators: {
+				name: "LeadGenerators",
 				description: "Action Bars, Pop Overs, and Widgets to boost conversions.",
 				colour: "#0F6F4B",
 				installed: true,
@@ -136,7 +136,7 @@ jQuery(function($) {
 				});
 				
 				$("html, body").scrollTop(0);
-				app.initializer();
+				if (typeof app.initializer == "function") { app.initializer(); }
 			}
 		},
 		
@@ -166,7 +166,7 @@ jQuery(function($) {
 				$(".wpmarketing .app_icon[data-show='upgrade'], .wpmarketing [data-show-for='upgrade']").remove();
 			}
 			
-			window.LandingPager.init();
+			window.SwayPage.init();
 			
 			if (window.location.hash.indexOf("apps/") != -1) {
 				$(window).trigger("hashchange");
