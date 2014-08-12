@@ -26,6 +26,15 @@
 	margin-left: 20px;
 }
 
+.wpmarketing_hold_place {
+	padding: 120px;
+	text-align: center;
+}
+
+.wpmarketing_hold_place p {
+	margin: 0;
+}
+
 .app_icon {
 	float: left;
 	width: 23.5%;
@@ -100,19 +109,25 @@
 
 .app[data-app="sway_page"] .loading {
 	display: none;
-	padding: 120px;
-	text-align: center;
 }
 
 .app[data-app="sway_page"].loading .loading {
 	display: block;
 }
 
-.app[data-app="sway_page"].loading .right_of_topbar, .app[data-app="sway_page"].not_found .right_of_topbar {
+.app[data-app="sway_page"].loading .right_of_topbar, .app[data-app="sway_page"].not_found .right_of_topbar, .app[data-app="sway_page"].empty .right_of_topbar {
 	display: none;
 }
 
-.app[data-app="sway_page"].loading .not_loading, .app[data-app="sway_page"].not_found .not_loading {
+.app[data-app="sway_page"].loading .not_loading, .app[data-app="sway_page"].not_found .not_loading, .app[data-app="sway_page"].empty .not_loading {
+	display: none;
+}
+
+.app[data-app="sway_page"].empty .empty {
+	display: block;
+}
+
+.app[data-app="sway_page"] .empty {
 	display: none;
 }
 

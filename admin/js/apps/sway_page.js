@@ -63,7 +63,9 @@ jQuery(function($) {
 		},
 	
 		init: function() {
-			
+			if ($(".sway_page_select").val() == "") {
+				app.removeClass("loading").removeClass("not_found").addClass("empty");
+			}
 		},
 		
 		addWidget: function(data) {
@@ -78,7 +80,7 @@ jQuery(function($) {
 		
 		show: function(id) {
 			id = parseInt(id);
-			app.addClass("loading").removeClass("not_found");
+			app.addClass("loading").removeClass("empty").removeClass("not_found");
 			app.find(".settings").hide();
 			$(".sway_page_select").val(id);
 			

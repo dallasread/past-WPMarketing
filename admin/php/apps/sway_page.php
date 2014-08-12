@@ -82,12 +82,18 @@
 		
 		<div class="app_panes with_sidebar">
 			
-			<div class="not_found">
+			<div class="not_found wpmarketing_hold_place">
 				This SwayPage could not be found.
 			</div>
 			
-			<div class="loading">
+			<div class="loading wpmarketing_hold_place">
 				<img src="<?php echo plugins_url("wpmarketing/admin/imgs/loading.gif"); ?>">
+			</div>
+			
+			<div class="empty wpmarketing_hold_place">
+				<p>
+					Choose a page from the list or <a href="#" class="new_sway_page">create a new one</a>.
+				</p>
 			</div>
 			
 			<div class="not_loading">

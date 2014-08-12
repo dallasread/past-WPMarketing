@@ -7,7 +7,8 @@ jQuery(function($) {
 				description: "Landing pages that are high-converting and built to persuade.",
 				colour: "#AD3C2D",
 				installed: true,
-				premium: true
+				premium: true,
+				initializer: window.SwayPage.init
 			},
 			convert_alert: {
 				name: "ConvertAlert",
@@ -177,8 +178,6 @@ jQuery(function($) {
 			if ($(".wpmarketing").hasClass("unlocked")) {
 				$(".wpmarketing .app_icon[data-show='upgrade'], .wpmarketing [data-show-for='upgrade']").remove();
 			}
-			
-			window.SwayPage.init();
 			
 			if (window.location.hash.indexOf("apps/") != -1) {
 				$(window).trigger("hashchange");
