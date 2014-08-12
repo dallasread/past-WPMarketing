@@ -1,12 +1,10 @@
 jQuery(function($) {
 	window.WPMarketing = {
 		plugins_url: $(".wpmarketing").data("plugins_url"),
-		unlock_code: $(".wpmarketing").data("unlock_code"),
-		unlocked: $(".wpmarketing").data("unlock_code") != "",
 		apps: {
 			sway_page: {
 				name: "SwayPage",
-				description: "3-Step, high-converting landing pages that are built to persuade.",
+				description: "Landing pages that are high-converting and built to persuade.",
 				colour: "#AD3C2D",
 				installed: true,
 				premium: true
@@ -106,6 +104,20 @@ jQuery(function($) {
 				premium: false
 			}
 		},
+		
+		unlock: function(trialing) {
+			trialing = typeof trialing !== "undefined" ? trialing : false;
+			
+			if (trialing) {
+				$(".wpmarketing").removeClass("locked").removeClass("unlocked").addClass("trialing");
+			} else {
+				$(".wpmarketing").removeClass("locked").removeClass("trialing").addClass("unlocked");
+				$(".wpmarketing [data-show='upgrade'], .wpmarketing [data-show-for='upgrade']").remove();
+			}
+			
+			$(".unlock_code_form").find(".loading").hide(150);
+			$(".unlock_code_form").find(".success").show(150);
+		},
 	
 		setApp: function (namespace) {
 			var old_app = window.WPMarketing.apps[$(".wpmarketing .app:visible").data("app")];
@@ -119,7 +131,7 @@ jQuery(function($) {
 			} else {
 				var app = window.WPMarketing.apps[namespace];
 
-				if (!app.installed && !window.WPMarketing.unlocked) {
+				if (!app.installed && $(".wpmarketing").hasClass("locked")) {
 					namespace = "upgrade";
 					app = window.WPMarketing.apps[namespace];
 				}
@@ -177,13 +189,21 @@ jQuery(function($) {
 	$(window).on('hashchange', function() {
 		var hash = window.location.hash.split("/");
 		if (typeof hash[hash.length - 1] != "undefined") {
-			window.WPMarketing.setApp(hash[hash.length - 1]);	
+			window.WPMarketing.setApp(hash[2]);
+			
+			if (hash.length == 4) {
+				var app_name = window.WPMarketing.apps[hash[2]].name;
+				
+				if (typeof window[app_name].show == "function") {
+					window[app_name].show(hash[3]);
+				}
+			}
 		} else {
 			window.WPMarketing.setApp("home");	
 		}
 	});
 	
-	$(document).on("click", ".wpmarketing [data-show], .wpmarketing [data-change-unlock-code]", function() {
+	$(document).on("click", ".wpmarketing [data-show], .wpmarketing [data-change-unlock-code], .wpmarketing [data-show-upgrade]", function() {
 		var namespace = $(this).attr("data-show");
 		if (typeof namespace == "undefined") { namespace = "upgrade"; }
 		window.location.hash = "!/apps/" + namespace;
@@ -212,18 +232,39 @@ jQuery(function($) {
 			var json = JSON.parse(response);
 			
 			if (json.success == true) {
-				$(".unlock_code_form").find(".loading").hide(150);
-				$(".unlock_code_form").find(".success").show(150);
-				$(".wpmarketing").removeClass("locked").addClass("unlocked");
 				$(".unlock_code").text(json.unlock_code);
-				$(".unlock_code_form").show()
-				$(".change_unlock_code_form").hide();
-				$(".wpmarketing .app_icon[data-show='upgrade'], .wpmarketing [data-show-for='upgrade']").remove();
-				window.WPMarketing.unlocked = true;
+				window.WPMarketing.unlock();
 			} else {
 				alert("The unlock code you provided was invalid.");
 				$(".unlock_code_form").find(".loading").hide(150);
 				$(".unlock_code_form").find(".initial").show(150);
+			}
+		});
+		return false;
+	});
+	
+	$(document).on("click", "[data-show-tab]", function() {
+		var settings = $(this).data("show-tab");
+		$(this).closest(".content").find("[data-tab='" + settings + "']").show();
+		return false;
+	});
+	
+	$(document).on("click", ".show_settings", function() {
+		$(this).closest(".content").find(".settings").toggle(150);
+		return false;
+	});
+	
+	$(document).on("click", ".start_free_trial", function() {
+		$.post(ajaxurl, {
+			action: "start_free_trial"
+		}, function(response) {
+			var json = JSON.parse(response);
+			
+			if (json.success == true) {
+				window.WPMarketing.unlock(true);
+				alert("Your FREE trial has started!");
+			} else {
+				alert("We weren't able to start your FREE trial.");
 			}
 		});
 		return false;

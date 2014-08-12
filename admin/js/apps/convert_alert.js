@@ -27,7 +27,6 @@ jQuery(function($) {
 		poll: function() {
 			$.post(ajaxurl, {
 				action: "convert_alert_poll",
-				unlock_code: $(this).find("input[name='unlock_code']").val(),
 				last_event_id: window.ConvertAlert.last_event_id
 			}, function(response) {
 				var contacts = JSON.parse(response);
@@ -111,11 +110,6 @@ jQuery(function($) {
 			window.ConvertAlert.pause();
 		}
 		
-		return false;
-	});
-	
-	$(document).on("click", ".show_in_thickbox", function() {
-		tb_show("Contact Profile", "http://dallasread.com", null);
 		return false;
 	});
 

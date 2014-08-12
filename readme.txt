@@ -92,6 +92,7 @@ Here are the next things on the list for WP Marketing:
 * publish
 * announce it everywhere
 
+* download wpmarketing data
 * hide wpmarketing from selected certain users
 * Installable app?
 

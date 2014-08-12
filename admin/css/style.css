@@ -21,6 +21,11 @@
 	float: right;
 }
 
+.wpmarketing .cta .button {
+	margin-top: -6px;
+	margin-left: 20px;
+}
+
 .app_icon {
 	float: left;
 	width: 23.5%;
@@ -91,6 +96,41 @@
 
 .app {
 	display: none;
+}
+
+.app[data-app="sway_page"] .loading {
+	display: none;
+	padding: 120px;
+	text-align: center;
+}
+
+.app[data-app="sway_page"].loading .loading {
+	display: block;
+}
+
+.app[data-app="sway_page"].loading .right_of_topbar, .app[data-app="sway_page"].not_found .right_of_topbar {
+	display: none;
+}
+
+.app[data-app="sway_page"].loading .not_loading, .app[data-app="sway_page"].not_found .not_loading {
+	display: none;
+}
+
+.app[data-app="sway_page"] .not_loading {
+	display: block;
+}
+
+.app[data-app="sway_page"].not_found .not_found {
+	display: block;
+}
+
+.app[data-app="sway_page"] .not_found {
+	display: none;
+}
+
+.app[data-app="sway_page"] .editor {
+	margin: 0;
+	padding: 10px;
 }
 
 .app[data-app="activate"] {
@@ -242,21 +282,9 @@
 	margin-bottom: 0;
 }
 
-.wpmarketing.locked .change_unlock_code_form {
-	display: none;
-}
-
-.wpmarketing.unlocked .unlock_code_form {
-	display: none;
-}
-
 .wpmarketing .unlock_code_form input[name="unlock_code"] {
 	width: 19em;
 	max-width: 100%;
-}
-
-.wpmarketing.unlocked [data-show="upgrade"] {
-	display: none;
 }
 
 .wpmarketing .unlock_code_form .loading, .wpmarketing .unlock_code_form .success {
@@ -285,6 +313,15 @@
 	border: 1px solid #B5847A;
 	padding: 10px;
 	color: #9F3331;
+	margin-bottom: 30px;
+}
+
+.wpmarketing_warning {
+	background: #F4EABF;
+	border-radius: 4px;
+	border: 1px solid #B9B48A;
+	padding: 10px;
+	color: #6D6A4D;
 	margin-bottom: 30px;
 }
 
@@ -369,9 +406,22 @@
 	margin: 0;
 }
 
+.wpmarketing .content .app_panes.with_sidebar .sidebar .widgets .separator {
+	padding: 3px 10px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #444;
+	text-transform: uppercase;
+	border-bottom: 1px solid #ddd;
+}
+
 .wpmarketing .content .app_panes.with_sidebar .sidebar .widgets a {
 	padding: 3px 10px;
 	display: block;
+}
+
+.wpmarketing .end_marketingfocus {
+	display: none;
 }
 
 #convert_alert_map {
@@ -434,4 +484,145 @@
 
 .wpmarketing .logo {
 	width: 200px;
+}
+
+.wpmarketing .tab {
+	display: none;
+}
+
+.wpmarketing .settings {
+	display: none;
+	text-align: left;
+}
+
+.wpmarketing .field .unaction {
+	color: #777;
+	font-size: 12px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: 3px;
+	margin-left: 10px;
+}
+
+.wpmarketing .widget_meta {
+	position: absolute;
+	background: #fff;
+	padding: 10px;
+	border: 1px solid #ddd;
+}
+
+[data-content]:hover, [data-byline]:hover, [data-question]:hover, [data-answer]:hover, [data-title]:hover {
+	background: #CAF0FF;
+}
+
+#sway_page_content_form textarea {
+	width: 100%;
+	height: 300px;
+}
+
+/*
+	Castle Theme
+*/
+
+.wpmarketing_theme[data-theme="castle"] h1 {
+	font-weight: bold;
+	font-size: 36px;
+	line-height: 44px;
+}
+
+.wpmarketing_theme[data-theme="castle"] h2 {
+	font-size: 26px;
+	line-height: 34px;
+	color: #777;
+}
+
+/*
+	RESET
+*/
+
+.wpmarketing_reset div, .wpmarketing_reset span, .wpmarketing_reset applet, .wpmarketing_reset object, .wpmarketing_reset iframe,
+.wpmarketing_reset h1, .wpmarketing_reset h2, .wpmarketing_reset h3, .wpmarketing_reset h4, .wpmarketing_reset h5, .wpmarketing_reset h6, .wpmarketing_reset p, .wpmarketing_reset blockquote, .wpmarketing_reset pre,
+.wpmarketing_reset a, .wpmarketing_reset abbr, .wpmarketing_reset acronym, .wpmarketing_reset address, .wpmarketing_reset big, .wpmarketing_reset cite, .wpmarketing_reset code,
+.wpmarketing_reset del, .wpmarketing_reset dfn, .wpmarketing_reset em, .wpmarketing_reset img, .wpmarketing_reset ins, .wpmarketing_reset kbd, .wpmarketing_reset q, .wpmarketing_reset s, .wpmarketing_reset samp,
+.wpmarketing_reset small, .wpmarketing_reset strike, .wpmarketing_reset strong, .wpmarketing_reset sub, .wpmarketing_reset sup, .wpmarketing_reset tt, .wpmarketing_reset var,
+.wpmarketing_reset b, .wpmarketing_reset u, .wpmarketing_reset i, .wpmarketing_reset center,
+.wpmarketing_reset dl, .wpmarketing_reset dt, .wpmarketing_reset dd, .wpmarketing_reset ol, .wpmarketing_reset ul, .wpmarketing_reset li,
+.wpmarketing_reset fieldset, .wpmarketing_reset form, .wpmarketing_reset label, .wpmarketing_reset legend,
+.wpmarketing_reset table, .wpmarketing_reset caption, .wpmarketing_reset tbody, .wpmarketing_reset tfoot, .wpmarketing_reset thead, .wpmarketing_reset tr, .wpmarketing_reset th, .wpmarketing_reset td,
+.wpmarketing_reset article, .wpmarketing_reset aside, .wpmarketing_reset canvas, .wpmarketing_reset details, .wpmarketing_reset embed, .wpmarketing_reset 
+.wpmarketing_reset figure, .wpmarketing_reset figcaption, .wpmarketing_reset footer, .wpmarketing_reset header, .wpmarketing_reset hgroup, .wpmarketing_reset 
+.wpmarketing_reset menu, .wpmarketing_reset nav, .wpmarketing_reset output, .wpmarketing_reset ruby, .wpmarketing_reset section, .wpmarketing_reset summary,
+.wpmarketing_reset time, .wpmarketing_reset mark, .wpmarketing_reset audio, .wpmarketing_reset video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	color: inherit;
+}
+
+.wpmarketing_reset article, .wpmarketing_reset aside, .wpmarketing_reset details, .wpmarketing_reset figcaption, .wpmarketing_reset figure, .wpmarketing_reset 
+footer, .wpmarketing_reset header, .wpmarketing_reset hgroup, .wpmarketing_reset menu, .wpmarketing_reset nav, .wpmarketing_reset section {
+	display: block;
+}
+.wpmarketing_reset {
+	line-height: 1;
+	font-family: Helvetica Neue, Helvetica, Arial, Sans Serif;
+	color: #000;
+}
+.wpmarketing_reset ol, .wpmarketing_reset ul {
+	list-style: none;
+}
+.wpmarketing_reset blockquote, .wpmarketing_reset q {
+	quotes: none;
+}
+.wpmarketing_reset blockquote:before, .wpmarketing_reset blockquote:after,
+.wpmarketing_reset q:before, .wpmarketing_reset q:after {
+	content: '';
+	content: none;
+}
+.wpmarketing_reset table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*
+	LOCKED STATES
+*/
+
+.wpmarketing.unlocked .unlock_code_form {
+	display: block;
+}
+
+.wpmarketing.unlocked .unlock_code_form {
+	display: none;
+}
+
+.wpmarketing.unlocked .wpmarketing_status_warning {
+	display: none;
+}
+
+.wpmarketing.unlocked [data-show="upgrade"] {
+	display: none;
+}
+
+.wpmarketing.trialing .wpmarketing_status_warning .is_locked {
+	display: none;
+}
+
+.wpmarketing.trial_complete .wpmarketing_status_warning .is_locked {
+	display: none;
+}
+
+.wpmarketing.locked .wpmarketing_status_warning .is_trialing {
+	display: none;
+}
+
+.wpmarketing.locked .change_unlock_code_form, .wpmarketing.trialing .change_unlock_code_form {
+	display: none;
+}
+
+.wpmarketing.locked .start_marketingfocus {
+	display: none;
 }

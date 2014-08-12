@@ -52,27 +52,42 @@
 				<ul data-app-list></ul>
 			
 				<p id="pricing"><br>
-					Now that you know what we have to offer, <em>with new apps being added regularly</em>, here are the annual plans we currently offer:
+					Now that you know what we have to offer, <em>with new apps being added regularly</em>, choose a plan to upgrade your account:
 				</p>
 			
 				<table class="wp-list-table widefat pricing_table">
 					<thead>
 						<tr>
-							<th>Basic</th>
-							<th style="font-size: 48px; background: #fff; ">Pro</th>
-							<th>Enterprise</th>
+							<th></th>
+							<th style="font-size: 48px; background: #fff; ">SuperSaver</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>$29 / month</td>
-							<td style="background: #fff; ">$49 / year</td>
-							<td>$99 / month</td>
+							<td>6 months for 30% off</td>
+							<td style="background: #fff; ">1 year for 55% off</td>
+							<td>$47/mo</td>
 						</tr>
 						<tr>
-							<td>1 Site</td>
-							<td style="background: #fff; "><span class="wpmarketing_highlight">5 Sites</span></td>
-							<td>20 Sites</td>
+							<td>Save $85.</td>
+							<td style="background: #fff; "><span class="wpmarketing_highlight">Save $315.</span></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Cancel any time.</td>
+							<td style="background: #fff; ">Cancel any time.</td>
+							<td>Cancel any time.</td>
+						</tr>
+						<tr>
+							<td>$197</td>
+							<td style="background: #fff; ">$247</td>
+							<td>$47</td>
+						</tr>
+						<tr>
+							<td>Up to 5 Sites</td>
+							<td style="background: #fff; ">Up to 5 Sites</td>
+							<td>Up to 5 Sites</td>
 						</tr>
 						<tr>
 							<td>Access to ALL Premium Apps &amp; Features</td>

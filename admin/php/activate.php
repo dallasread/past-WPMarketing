@@ -21,12 +21,12 @@
 					<div style="margin: 35px 0; ">
 						<div class="field">
 				      <label for="name">Your Name</label>
-				      <input type="text" name="name" id="name" value="<?php echo $_POST["name"]; ?>">
+				      <input type="text" name="name" id="name" value="<?php if (isset($_POST["name"])) { echo $_POST["name"]; } ?>">
 				    </div>
 
 				    <div class="field">
 				      <label for="email">Your Email</label>
-				      <input type="text" name="email" id="email" value="<?php echo $_POST["email"]; ?>">
+				      <input type="text" name="email" id="email" value="<?php if (isset($_POST["email"])) { echo $_POST["email"]; } ?>">
 				    </div>
 						
 						<p style="font-size: 10px; color: #aaa; "><br>&check; &nbsp; By activating WP Marketing, you are opting in to receive WP Marketing updates (new features, special offers).</p>

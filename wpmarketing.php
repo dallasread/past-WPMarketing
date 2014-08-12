@@ -15,7 +15,7 @@ Tested up to: 3.9.1
 Stable tag: trunk
 License: MIT
 
-Copyright (c) 2013 Dallas Read.
+Copyright (c) 2014 Dallas Read.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,10 +36,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
+
 /*
 ini_set("display_errors",1);
 ini_set("display_startup_errors",1);
 error_reporting(-1);*/
+
 
 
 class WPMarketing
@@ -52,13 +54,26 @@ class WPMarketing
   }
 
   private function __construct() {
-		add_action( "init", array( $this, "register_post_type" ) );
+		global $mustache;
+		define("WPMARKETING_ROOT", dirname(__FILE__));
+		
+		require_once WPMARKETING_ROOT . "/admin/php/vendor/mustache/Autoloader.php";
+		Mustache_Autoloader::register();
+		$mustache = new Mustache_Engine(array(
+			"loader" => new Mustache_Loader_FilesystemLoader(WPMARKETING_ROOT . "/public/php/templates/sway_page/widgets")
+		));
+		
     add_action( "admin_menu", array( $this, "menu_page" ) );
 		add_action( "admin_init", array( $this, "admin_footer" ) );
 		add_filter( "template_include", array( $this, "sway_page_template_path") );
 		
 		add_action( "wp_ajax_unlock", array( $this, "unlock" ) );
-		add_action( "wp_ajax_create_sway_page", array( $this, "create_sway_page" ) );
+		add_action( "wp_ajax_start_free_trial", array( $this, "start_free_trial" ) );
+		
+		add_action( "wp_ajax_sway_page_create", array( $this, "sway_page_create" ) );
+		add_action( "wp_ajax_sway_page_show", array( $this, "sway_page_show" ) );
+		add_action( "wp_ajax_sway_page_update", array( $this, "sway_page_update" ) );
+		
 		add_action( "wp_ajax_convert_alert_status", array( $this, "convert_alert_status" ) );
 		add_action( "wp_ajax_convert_alert_poll", array( $this, "convert_alert_poll" ) );
 		
@@ -76,6 +91,7 @@ class WPMarketing
   public static function admin_panel() {
 		global $wpmarketing;
 		global $just_activated;
+		global $mustache;
 		
     WPMarketing::parse_params();
     $wpmarketing = WPMarketing::settings();
@@ -100,11 +116,11 @@ class WPMarketing
 		wp_register_script( "wpmarketing_sway_page", plugins_url("admin/js/apps/sway_page.js", __FILE__) );
 		wp_register_script( "wpmarketing_convert_alert", plugins_url("admin/js/apps/convert_alert.js", __FILE__) );
 		
-		wp_enqueue_script( array( "wpmarketing_sway_page", "wpmarketing_convert_alert", "wpmarketing_script", "mustache", "thickbox", "jquery" ) );
+		wp_enqueue_script( array( "wpmarketing_sway_page", "wpmarketing_convert_alert", "wpmarketing_script", "mustache", "thickbox", "jquery-ui-sortable", "jquery" ) );
 	}
   
   public static function uninstall() {
-    delete_option("wpmarketing_settings");
+    // delete_option("wpmarketing_settings");
   }
   
   public static function settings($update = array()) {
@@ -121,7 +137,8 @@ class WPMarketing
 	      "unlock_code" => "",
 	      "subscriber_name" => "",
 	      "subscriber_email" => "",
-				"convert_alert_status" => "on"
+				"convert_alert_status" => "on",
+				"trial_end_at" => 0
 	    );
 			
 			if (!empty($update) || $wpmarketing != $settings) {
@@ -129,6 +146,14 @@ class WPMarketing
 				$wpmarketing = array_merge($wpmarketing, $update);
 				update_option("wpmarketing_settings", $wpmarketing);
 			}    
+			
+			if ($wpmarketing["unlock_code"] != "") {
+				$wpmarketing["status"] = "unlocked";
+			} else if ($wpmarketing["trial_end_at"] > time()) {
+				$wpmarketing["status"] = "trialing";
+			} else {
+				$wpmarketing["status"] = "locked";
+			}
 		}
 				
     return $wpmarketing;
@@ -165,8 +190,20 @@ class WPMarketing
 		}
   }
 	
+	public static function start_free_trial() {
+		global $wpmarketing;
+		$data = array( "success" => false );
+		
+    if ($wpmarketing["trial_end_at"] == 0) {
+      $data = WPMarketing::settings( array( "trial_end_at" => strtotime("+7 day") ) );
+			$data["success"] = true;
+		}
+		
+    die(json_encode($data));
+	}
+	
 	/*
-		Landing Pager
+		SwayPage
 	*/
 	
 	public static function sway_page_template_path($template) {
@@ -182,17 +219,29 @@ class WPMarketing
 		return $template;
 	}
 	
-	public static function create_sway_page() {
+	public static function sway_page_show($id = false) {
 		$data = array("success" => false);
+		$response = get_post($_POST["id"], ARRAY_A);
 		
-		$post = array(
+		if (!empty($response)) {
+			$data = $response;
+			$data["post_content"] = stripslashes_deep(json_decode($response["post_content"]));
+			$data["success"] = true;
+		}
+		
+		die(json_encode($data));
+	}
+	
+	public static function sway_page_create() {
+		$data = array(
 		  "post_title"    => $_POST["title"],
 			"post_name"			=> $_POST["name"],
-			"post_type"			=> "landing_page",
+			"post_type"			=> "page",
 		  "post_status"   => "draft"
 		);
-
-		$response = wp_insert_post( $post );
+		
+		$response = wp_insert_post( $data );
+		$data["success"] = false;
 		
 		if ($response != 0) {
 			$data["id"] = $response;
@@ -203,31 +252,19 @@ class WPMarketing
 		die(json_encode($data));
 	}
 	
-	public static function register_post_type() {
+	public static function sway_page_update() {
+		$data = array(
+			"ID" => $_POST["id"],
+			"post_content" => addslashes(json_encode($_POST["post_content"])),
+			"post_title" => $_POST["post_title"],
+			"post_name" => $_POST["post_name"],
+			"post_status" => $_POST["post_status"]
+		);
 		
-    $args = array(
-      "labels"             => array(
-	      "name"               => "Landing Pages",
-	      "singular_name"      => "Landing Page"
-	    ),
-      "public"             => true,
-      "publicly_queryable" => true,
-      "show_ui"            => true, //false
-      "show_in_menu"       => true, //false
-      "query_var"          => "landing_page",
-      "rewrite"            => false,
-      "capability_type"    => "page",
-      "has_archive"        => false,
-      "hierarchical"       => false,
-      "menu_position"      => null,
-      "supports"           => array( "title", "author", "comments" )
-    );
+		wp_update_post($data);
+		$data["success"] = true;
 		
-		
-    register_post_type( "landing_page", $args );      
-		add_rewrite_rule('(.+?)/', 'index.php?landing_page=$matches[1]', 'guru');
-    flush_rewrite_rules();
-		flush_rewrite_rules();
+		die(json_encode($data));
 	}
 	
 	/*
@@ -284,7 +321,7 @@ class WPMarketing
 	}
 }
 
-//WPMarketing::uninstall();
+// delete_option("wpmarketing_settings");
 WPMarketing::init();
 
 ?>

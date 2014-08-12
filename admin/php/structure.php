@@ -1,5 +1,4 @@
-<div class="wrap wpmarketing <?php if ($wpmarketing["unlock_code"] != "") { echo "un"; } ?>locked" data-plugins_url="<?php echo plugins_url("wpmarketing/"); ?>" data-unlock_code="<?php echo $wpmarketing["unlock_code"]; ?>">
-	
+<div class="wrap wpmarketing <?php echo $wpmarketing["status"]; ?>" data-plugins_url="<?php echo plugins_url("wpmarketing/"); ?>">
 	<?php require_once "header.php"; ?>
 	<?php require_once "remetric.php"; ?>
 	
@@ -28,6 +27,8 @@
 <?php if (isset($_REQUEST["nowp"])) { ?>
 	<script type="text/javascript">
 		jQuery(function($) {
+			$(".end_marketingfocus").show();
+			$(".start_marketingfocus").hide();
 			$("#wpadminbar, #adminmenuwrap, #adminmenuback, #wpfooter").hide();
 			$("#wpwrap, .wrap").css("margin", 0);
 			$("#wpcontent").css("margin", "-40px 0 0 0")
