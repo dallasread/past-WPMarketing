@@ -395,35 +395,43 @@ class WPMarketing {
         "user_agent" => $_SERVER["HTTP_USER_AGENT"]
 			);
 			
+			$user_agent = WPMarketing::analyze_user_agent($visitor_data["user_agent"]);
+			$visitor_data["os"] = $user_agent["os"];
+			$visitor_data["browser"] = $user_agent["browser"];
+			
 			if (is_object($geo) && property_exists($geo, "city")) {
         $visitor_data["city"] = $geo->city;
         $visitor_data["province"] = $geo->region_name;
         $visitor_data["country"] = $geo->country_name;
-        $visitor_data["country_code"] = $geo->country_code;
+        $visitor_data["country_code"] = strtolower($geo->country_code);
         $visitor_data["province_code"] = $geo->region_code;
         $visitor_data["latitude"] = $geo->latitude;
         $visitor_data["longitude"] = $geo->longitude;
+			} else {
+				$visitor_data["country_code"] = "undeterminable";
 			}
 			
+			$visitor["wpmkey"] = WPMarketing::generate_wpmkey();
+      $visitor["created_at"] = date("Y-m-d h:i:s");
+      $visitor["updated_at"] = date("Y-m-d h:i:s");
+			
 			if ($user) {
+				$visitor["email"] = $user->user_email;
+				$visitor["user_id"] = $user->ID;
 				$visitor_data["display_name"] = $user->display_name;
 				$visitor_data["nicename"] = $user->user_nicename;
 				$visitor_data["login"] = $user->user_nicename;
 				$visitor_data["registered"] = $user->user_registered;
 			}
 			
-			$visitor = array(
-				"wpmkey" => WPMarketing::generate_wpmkey(),
-				"data" => addslashes(json_encode($visitor_data)),
-        "created_at" => date("Y-m-d h:i:s"),
-        "updated_at" => date("Y-m-d h:i:s")
-			);
-			
-			if ($user) {
-				$visitor["email"] = $user->user_email;
-				$visitor["user_id"] = $user->ID;
+			if (isset($visitor["email"])) {
+				$visitor_data["avatar"] = "http://www.gravatar.com/avatar/" . md5( strtolower( trim( $visitor["email"] ) ) );
+			} else {
+				$visitor_data["avatar"] = plugins_url("admin/imgs/undeterminable.jpg", __FILE__);
 			}
 			
+			$visitor["data"] = addslashes(json_encode($visitor_data));
+
 			$wpdb->insert( $visitors_table, $visitor );
 			$visitor["id"] = $wpdb->insert_id;
 		}
@@ -457,6 +465,11 @@ class WPMarketing {
 		die(json_encode($data));
 	}
 	
+	public static function analyze_user_agent($user_agent) {
+		$results = array( "os" => "windows", "browser" => "chrome" );
+		return $results;
+	}
+	
 	public static function generate_wpmkey() {
 		return md5(uniqid(rand() * rand(), true));
 	}
@@ -478,23 +491,15 @@ class WPMarketing {
 		}
 
 		foreach ($events as $e) {
+			$visitor_id = $e["visitor_id"];
 			$event = json_decode(stripslashes_deep($e["data"]), true);
-			$visitor = array(
-				"id" => rand(),
-				"name" => "Dallas Read",
-				"avatar" => "http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50",
-				"os" => "apple",
-				"browser" => "chrome",
-				"country_code" => "ca",
-				"latitude" => "-10",
-				"longitude" => "110",
-				"ip" => "0.1.2.3"
-			);
+			$visitor = $wpdb->get_row("SELECT * FROM $visitors_table WHERE id = $visitor_id", ARRAY_A);
 			
 			$event["id"] = $e["id"];
 			$event["description"] = $e["description"];
 			$event["verb"] = $e["verb"];
-			$event["visitor"] = $visitor;
+			$event["visitor"] = json_decode(stripslashes_deep($visitor["data"]), true);
+			$event["visitor"]["id"] = $visitor_id;
 			
 			array_push($data, $event);
 		}

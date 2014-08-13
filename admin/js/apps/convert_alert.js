@@ -6,6 +6,8 @@ jQuery(function($) {
 		markers: [],
 		
 		init: function() {
+		  Mustache.escape = function(string) { return string; }
+		  
 			window.ConvertAlert.addGoogle();
 			
 			if ($(".wpmarketing .convert_alert_status").hasClass("on")) {
@@ -29,14 +31,13 @@ jQuery(function($) {
 				action: "convert_alert_poll",
 				last_event_id: window.ConvertAlert.last_event_id
 			}, function(response) {
+				window.ConvertAlert.poller = setTimeout(window.ConvertAlert.poll, 10000);
 				var events = JSON.parse(response);
 
 				events.forEach(function(event) {
 					window.ConvertAlert.events.push(event);
 					window.ConvertAlert.last_event_id = event.id
 				});
-
-				window.ConvertAlert.poller = setTimeout(window.ConvertAlert.poll, 10000);
 			});
 		},
 		
@@ -45,7 +46,7 @@ jQuery(function($) {
 				var event = window.ConvertAlert.events.shift();
 				var template = $("#wpmarketing_convert_alert_event_template").html();
 				var description_data = event;
-				description_data.visitor.name = "<a href=\"#\" class=\"show_in_thickbox\" data-model=\"visitor\" data-id=\"" + event.visitor.id + "\">" + event.visitor.name + "</a>";
+				description_data.visitor.name = "<a href=\"#\" class=\"show_in_thickbox\" data-model=\"visitor\" data-id=\"" + event.visitor.id + "\">" + event.visitor.display_name + "</a>";
 				description_data.page.title = "<a href=\"" + event.page.url + "\" target=\"_blank\">" + event.page.title + "</a>";
 				event.description = Mustache.render(event.description, description_data);
 				var html = Mustache.render(template, event);
@@ -118,7 +119,7 @@ jQuery(function($) {
 	});
 	
 	$(document).on("click", ".wpmarketing .show_in_thickbox", function() {
-		// PAUSE
+		window.ConvertAlert.pause();
 		tb_show("Visitor Profile", "#TB_inline?height=425&width=450&inlineId=sway_page_content_editor", null);
 		// UNPAUSE ON CLOSE
 		return false;
