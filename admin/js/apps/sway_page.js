@@ -44,7 +44,7 @@ jQuery(function($) {
 					content: "One of the best plugin I have ever seen!!!"
 				}, {
 					byline: "Anonymous",
-					content: "Really simple setup and use! Just awesome! Thank you Dallas!"
+					content: "Really simple setup and use! Just ConvertAlert! Thank you Dallas!"
 				}, {
 					byline: "Anonymous",
 					content: "Thanks a million buddy ...... worked out great!"

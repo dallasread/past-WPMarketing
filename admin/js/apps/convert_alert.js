@@ -29,9 +29,9 @@ jQuery(function($) {
 				action: "convert_alert_poll",
 				last_event_id: window.ConvertAlert.last_event_id
 			}, function(response) {
-				var contacts = JSON.parse(response);
+				var events = JSON.parse(response);
 
-				contacts.forEach(function(event) {
+				events.forEach(function(event) {
 					window.ConvertAlert.events.push(event);
 					window.ConvertAlert.last_event_id = event.id
 				});
@@ -44,10 +44,14 @@ jQuery(function($) {
 			if (window.ConvertAlert.events.length) {
 				var event = window.ConvertAlert.events.shift();
 				var template = $("#wpmarketing_convert_alert_event_template").html();
+				var description_data = event;
+				description_data.visitor.name = "<a href=\"#\" class=\"show_in_thickbox\" data-model=\"visitor\" data-id=\"" + event.visitor.id + "\">" + event.visitor.name + "</a>";
+				description_data.page.title = "<a href=\"" + event.page.url + "\" target=\"_blank\">" + event.page.title + "</a>";
+				event.description = Mustache.render(event.description, description_data);
 				var html = Mustache.render(template, event);
 				
 				window.ConvertAlert.markers.push(new google.maps.Marker({
-			    position: new google.maps.LatLng(event.contact.latitude, event.contact.longitude),
+			    position: new google.maps.LatLng(event.visitor.latitude, event.visitor.longitude),
 			    map: window.ConvertAlert.map,
 			    title: "Hello World!"
 				}));
@@ -111,6 +115,20 @@ jQuery(function($) {
 		}
 		
 		return false;
+	});
+	
+	$(document).on("click", ".wpmarketing .show_in_thickbox", function() {
+		// PAUSE
+		tb_show("Visitor Profile", "#TB_inline?height=425&width=450&inlineId=sway_page_content_editor", null);
+		// UNPAUSE ON CLOSE
+		return false;
+	});
+	
+	$(document).on("click", ".wpmarketing .newsfeed a", function() {
+		if (!$(this).hasClass("show_in_thickbox")) {
+			window.open($(this).attr("href"), "_blank");
+			return false;
+		}
 	});
 
 });

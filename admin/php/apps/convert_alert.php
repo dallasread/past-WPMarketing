@@ -40,16 +40,16 @@
 
 <script id="wpmarketing_convert_alert_event_template" type="x-tmpl-mustache">
 	<li data-latitude="{{ latitude }}" data-longitude="{{ longitude }}">
-		<img src="{{ contact.avatar }}" class="avatar">
+		<img src="{{ visitor.avatar }}" class="avatar">
 	
 		<div class="meta">
 			<p class="description">
-				<a href="#" class="show_in_thickbox" data-model="contact" data-id="{{ contact.id }}">{{ contact.name }}</a> {{ description }}.
+				{{{ description }}}
 			</p>
 			<div class="profile_imgs">
-				<img src="<?php echo plugins_url("wpmarketing/admin/imgs/flag/{{ contact.country_code }}.png"); ?>" class="tiny_img">
-				<img src="<?php echo plugins_url("wpmarketing/admin/imgs/os/{{ contact.os }}.png"); ?>" class="tiny_img">
-				<img src="<?php echo plugins_url("wpmarketing/admin/imgs/browser/{{ contact.browser }}.png"); ?>" class="tiny_img">
+				<img src="<?php echo plugins_url("wpmarketing/admin/imgs/flag/{{ visitor.country_code }}.png"); ?>" class="tiny_img">
+				<img src="<?php echo plugins_url("wpmarketing/admin/imgs/os/{{ visitor.os }}.png"); ?>" class="tiny_img">
+				<img src="<?php echo plugins_url("wpmarketing/admin/imgs/browser/{{ visitor.browser }}.png"); ?>" class="tiny_img">
 			</div>
 		</div>
 	
