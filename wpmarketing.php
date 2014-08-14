@@ -3,7 +3,7 @@
 
 Plugin Name: WP Marketing
 Plugin URI: http://WPMarketing.guru
-Description: Tools to help you market your website
+Description: WPMarketing is a suite of apps that helps you engage your customers, create landing pages, rocket your conversions, connect with your visitors, and boost your profits. New Apps are added on a regular basis.
 Version: 1.0
 Contributors: dallas22ca
 Author: Dallas Read
@@ -96,7 +96,7 @@ class WPMarketing {
     WPMarketing::parse_params();
     $wpmarketing = WPMarketing::settings();
 		
-		if ($wpmarketing["subscriber_email"] == "") {
+		if (!isset($wpmarketing["subscriber_email"]) || $wpmarketing["subscriber_email"] == "") {
 			require_once "admin/php/activate.php";
 		} else {
 			require_once "admin/php/structure.php";
@@ -508,6 +508,6 @@ class WPMarketing {
 	}
 }
 
-// delete_option("wpmarketing_settings");
+//delete_option("wpmarketing_settings");
 WPMarketing::init();
 ?>

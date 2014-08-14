@@ -38,7 +38,7 @@
 				</p>
 			
 				<p class="button_wrapper">
-					<a href="#pricing" class="button button-primary button-hero orange">Show me how to unlock my WP Marketing Apps!</a>
+					<a href="#!/apps/upgrade/pricing" class="button button-primary button-hero orange">Show me how to unlock WP Marketing!</a>
 				</p>
 			
 			  <p>
@@ -46,86 +46,113 @@
 				</p>
 			
 				<p><br>
-					Here's our lineup of apps with premium, high-converting features:
+					Here's our lineup of apps with premium, high-converting features (with new apps being added regularly):
 				</p>
 			
 				<ul data-app-list></ul>
 			
-				<p id="pricing"><br>
-					Now that you know what we have to offer, <em>with new apps being added regularly</em>, choose a plan to upgrade your account:
+				<p id="!/apps/upgrade/pricing"><br>
+					We offer 3 subscription plans: Month-to-Month, 6-Months, and Annual. All plans share the same feature-set.
 				</p>
-			
-				<table class="wp-list-table widefat pricing_table">
-					<thead>
-						<tr>
-							<th></th>
-							<th style="font-size: 48px; background: #fff; ">SuperSaver</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>6 months for 30% off</td>
-							<td style="background: #fff; ">1 year for 55% off</td>
-							<td>$47/mo</td>
-						</tr>
-						<tr>
-							<td>Save $85.</td>
-							<td style="background: #fff; "><span class="wpmarketing_highlight">Save $315.</span></td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>Cancel any time.</td>
-							<td style="background: #fff; ">Cancel any time.</td>
-							<td>Cancel any time.</td>
-						</tr>
-						<tr>
-							<td>$197</td>
-							<td style="background: #fff; ">$247</td>
-							<td>$47</td>
-						</tr>
-						<tr>
-							<td>Up to 5 Sites</td>
-							<td style="background: #fff; ">Up to 5 Sites</td>
-							<td>Up to 5 Sites</td>
-						</tr>
-						<tr>
-							<td>Access to ALL Premium Apps &amp; Features</td>
-							<td style="background: #fff; ">Access to ALL Premium Apps &amp; Features</td>
-							<td>Access to ALL Premium Apps &amp; Features</td>
-						</tr>
-						<tr>
-							<td>1 year of Upgrades &amp; Support</td>
-							<td style="background: #fff; ">1 year of Upgrades &amp; Support</td>
-							<td>1 year of Upgrades &amp; Support</td>
-						</tr>
-						<tr>
-							<td><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NX9NZCDNRD3CC" target="_blank" class="button button-primary button-large">Buy Now</a></td>
-							<td style="background: #fff; "><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HSDMLTLJS3Z3S" target="_blank" class="button button-primary button-hero orange">Buy Now</a></td>
-							<td><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QL5FGKK7QEGA8" target="_blank" class="button button-primary button-large">Buy Now</a></td>
-						</tr>
-					</tbody>
-				</table>
-				<p>We also offer a <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SA2LARZBRG46U" target="_blank">100-site package for $899</a>.</p>
-			
-				<br>
+				
+				<p>
+					Click on a plan to read more about it and subscribe:
+				</p>
+				
+				<div class="pricing_model_wrapper">
+					
+					<div class="pricing_model suggestion">
+						<input type="radio" name="model" class="radio_button" checked="checked">
+						
+						<h4>RECOMMENDED: 6 Months for 30% Off</h4>
+						<p>With this short-term commitment, you'll become an online marketing, social media, lead generation and conversion rate expert in no time!</p>
+						
+						<div class="wpmarketing_clear"></div>
+						
+						<ul class="checklist">
+							<li>&check; &nbsp; Access to ALL Premium Apps &amp; Features</li>
+							<li>&check; &nbsp; Never need another Marketing plugin</li>
+							<li>&check; &nbsp; 1 year of Upgrades &amp; Support</li>
+							<li>&check; &nbsp; New Apps added regularly</li>
+							<li>&check; &nbsp; Cancel any time</li>
+						</ul>
+						
+						<div class="action_area">
+							<h5>$197 USD</h5>
+							<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HSDMLTLJS3Z3S" target="_blank" class="button button-primary button-hero orange">Choose 6-Month Plan &nbsp; &nbsp;&rarr;</a>
+							<p class="risk_reversal">You're about to save <strong>$85</strong>.</p>
+						</div>
+						
+						<div class="clear"></div>
+					</div>
+					
+					<div class="pricing_model">
+						<input type="radio" name="model" class="radio_button">
+						
+						<h4>Big Savings: 1 Year for 55% Off</h4>
+						<p>Pay for the year to receive a huge 55% discount. This plan was designed for people that are serious about growing their online business.</p>
+						
+						<ul class="checklist">
+							<li>&check; &nbsp; Access to ALL Premium Apps &amp; Features</li>
+							<li>&check; &nbsp; Never need another Marketing plugin</li>
+							<li>&check; &nbsp; 1 year of Upgrades &amp; Support</li>
+							<li>&check; &nbsp; New Apps added regularly</li>
+							<li>&check; &nbsp; Cancel any time</li>
+						</ul>
+						
+						<div class="action_area">
+							<h5>$247 USD</h5>
+							<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SA2LARZBRG46U" target="_blank" class="button button-primary button-hero orange">Choose Annual Plan &nbsp; &nbsp;&rarr;</a>
+							<p class="risk_reversal">You're about to save <strong>$315</strong>.</p>
+						</div>
+						
+						<div class="clear"></div>
+					</div>
+					
+					<div class="pricing_model">
+						<input type="radio" name="model" class="radio_button">
+						
+						<h4>Month-to-Month: $47/mo</h4>
+						
+						<ul class="checklist">
+							<li>&check; &nbsp; Access to ALL Premium Apps &amp; Features</li>
+							<li>&check; &nbsp; Never need another Marketing plugin</li>
+							<li>&check; &nbsp; 1 year of Upgrades &amp; Support</li>
+							<li>&check; &nbsp; New Apps added regularly</li>
+							<li>&check; &nbsp; Cancel any time</li>
+						</ul>
+						
+						<div class="action_area">
+							<h5>$47 USD</h5>
+							<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NX9NZCDNRD3CC" target="_blank" class="button button-primary button-hero orange">Choose Month-to-Month &nbsp; &nbsp;&rarr;</a>
+							<p class="risk_reversal">No risk - cancel any time!</p>
+						</div>
+						
+						<div class="clear"></div>
+					</div>
+				
+				</div>
 			
 				<h2>Frequently Asked Questions</h2>
 				<ul class="faq">
 					<li>
 						<p class="question">What if I'm not satisfied with the purchase?</p>
-						<p>If you're not 100% satisfied with WP Marketing within 15 days of purchase, we'll immediately refund you (and cancel future payments).</p>
+						<p>We offer a Free 7-Day trial to avoid dissatisfied purchases. If you're still not 100% satisfied with WP Marketing within 15 days of purchase, we'll immediately refund you (and cancel future payments).</p>
 					</li>
 					<li>
 						<p class="question">Do you offer a free trial?</p>
-						<p>If you're really not sure about whether WP Marketing is for you, send us an email at dallas@excitecreative.ca and we'll set you up with a couple free days of service. We're also working on video tutorials that will show you the power of WP Marketing.</p>
+						<p>Yes! You should find a link for a free trial at the top of this page (unless you've used it already!).</p>
 					</li>
 					<li>
 						<p class="question">Do I have to sign a long-term contract?</p>
-						<p>No. WP Marketing is a pay-as-you-go service. There are no long-term contracts or commitments on your part. If you purchase our annual subscription, then you simply pay year-to-year. When you cancel your subscription, you will lose the access to themes and won’t be billed again.</p>
+						<p>No. WP Marketing is a pay-as-you-go service. There are no long-term contracts or commitments on your part. For example, if you purchase our annual subscription, then you simply pay year-to-year. When you cancel your subscription, you won’t be billed again.</p>
 					</li>
 					<li>
 						<p class="question">Do you have one-time or multi-year purchasing options?</p>
+						<p>Not at the moment.</p>
+					</li>
+					<li>
+						<p class="question">Do you have multi-site purchasing options?</p>
 						<p>Not at the moment.</p>
 					</li>
 					<li>
@@ -135,7 +162,7 @@
 				</ul>
 			
 				<p class="button_wrapper">
-					<a href="#pricing" class="button button-primary button-hero orange">Show me how to unlock my WP Marketing Apps!</a>
+					<a href="#!/apps/upgrade/pricing" class="button button-primary button-hero orange">Show me how to unlock WP Marketing!</a>
 				</p>
 			</div>
 			

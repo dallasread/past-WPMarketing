@@ -1,8 +1,8 @@
-<div class="app" data-app="autosocializer">
+<div class="app" data-app="SocialPro">
 	<div class="header"></div>
 	
 	<div class="content">
 		Automatically have new posts announced via social media.<br><br>
-		Autosocializer is coming soon!
+		SocialPro is coming soon!
 	</div>
 </div>

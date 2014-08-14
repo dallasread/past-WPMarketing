@@ -7,7 +7,7 @@ jQuery(function($) {
 				description: "Landing pages that are high-converting and built to persuade.",
 				colour: "#AD3C2D",
 				installed: true,
-				premium: true,
+				premium: false,
 				initializer: window.SwayPage.init
 			},
 			convert_alert: {
@@ -15,7 +15,7 @@ jQuery(function($) {
 				description: "Find out how your visitors are interacting in real time.",
 				colour: "#0E8FAA",
 				installed: true,
-				premium: true,
+				premium: false,
 				initializer: window.ConvertAlert.init,
 				destroyer: window.ConvertAlert.pause
 			},
@@ -23,6 +23,13 @@ jQuery(function($) {
 				name: "LeadGenerators",
 				description: "Action Bars, Pop Overs, and Widgets to boost conversions.",
 				colour: "#0F6F4B",
+				installed: true,
+				premium: false
+			},
+			SocialPro: {
+				name: "SocialPro",
+				description: "Automatically announce posts via social media and interact.",
+				colour: "#552A99",
 				installed: true,
 				premium: true
 			},
@@ -37,16 +44,9 @@ jQuery(function($) {
 			supercharged_seo: {
 				name: "Supercharged SEO",
 				description: "Dynamic, tailored optimizations for #1 ranking results.",
-				colour: "#297971",
+				colour: "#3A3B99",
 				installed: false,
 				premium: true
-			},
-			autosocializer: {
-				name: "AutoSocializer",
-				description: "Automatically have new posts announced via social media.",
-				colour: "#552A99",
-				installed: false,
-				premium: false
 			},
 			ads_wizard: {
 				name: "Ads Wizard",
@@ -79,14 +79,14 @@ jQuery(function($) {
 			simple_segment: {
 				name: "SimpleSegment",
 				description: "Group your contacts into segments for super-effective targeting.",
-				colour: "#3A3B99",
+				colour: "#AD4C22",
 				installed: false,
 				premium: false
 			},
 			integrations: {
 				name: "3rd-Party Integrations",
 				description: "Mailchimp, Aweber, GetResponse, Wufoo, etc.",
-				colour: "#AD4C22",
+				colour: "#297971",
 				installed: false,
 				premium: true
 			},
@@ -132,7 +132,11 @@ jQuery(function($) {
 			} else {
 				var app = window.WPMarketing.apps[namespace];
 
-				if (!app.installed && $(".wpmarketing").hasClass("locked")) {
+				if (!app.installed) {
+					alert(app.name + " will be released in the near future!");
+					window.location.hash = "!/apps/home";
+					return false;
+				} else if (app.premium && $(".wpmarketing").hasClass("locked")) {
 					namespace = "upgrade";
 					app = window.WPMarketing.apps[namespace];
 				}
@@ -158,8 +162,8 @@ jQuery(function($) {
 	
 			$.each(window.WPMarketing.apps, function(namespace, app) {
 				var coming_soon = app.installed ? "" : "is_coming_soon";
-				var premium = app.premium ? "" : "premium";
-				var template = $("<div class=\"app_icon " + premium + " " + coming_soon + "\"><img src=\"" + window.WPMarketing.plugins_url + "admin/imgs/coming_soon.png\" class=\"coming_soon\"><h3></h3><p></p></div>");
+				var premium = app.premium ? "is_premium" : "";
+				var template = $("<div class=\"app_icon " + premium + " " + coming_soon + "\"><img src=\"" + window.WPMarketing.plugins_url + "admin/imgs/coming_soon.png\" class=\"coming_soon\"><img src=\"" + window.WPMarketing.plugins_url + "admin/imgs/premium.png\" class=\"premium\"><h3></h3><p></p></div>");
 				template.attr("data-show", namespace);
 				template.find("h3").text(app.name);
 				template.find("p").text(app.description);
@@ -186,19 +190,21 @@ jQuery(function($) {
 	}
 	
 	$(window).on('hashchange', function() {
-		var hash = window.location.hash.split("/");
-		if (typeof hash[hash.length - 1] != "undefined") {
-			window.WPMarketing.setApp(hash[2]);
+		if (window.location.hash.indexOf("pricing") == -1) {
+			var hash = window.location.hash.split("/");
+			if (typeof hash[hash.length - 1] != "undefined") {
+				window.WPMarketing.setApp(hash[2]);
 			
-			if (hash.length == 4) {
-				var app_name = window.WPMarketing.apps[hash[2]].name;
+				if (hash.length == 4) {
+					var app_name = window.WPMarketing.apps[hash[2]].name;
 				
-				if (typeof window[app_name].show == "function") {
-					window[app_name].show(hash[3]);
+					if (typeof window[app_name].show == "function") {
+						window[app_name].show(hash[3]);
+					}
 				}
+			} else {
+				window.WPMarketing.setApp("home");	
 			}
-		} else {
-			window.WPMarketing.setApp("home");	
 		}
 	});
 	
@@ -267,6 +273,15 @@ jQuery(function($) {
 			}
 		});
 		return false;
+	});
+	
+	$(document).on("click", ".wpmarketing .app[data-app='upgrade'] .pricing_model", function() {
+		if (!$(this).hasClass("suggestion")) {
+			$(".pricing_model.suggestion .radio_button").prop("checked", false);
+			$(".pricing_model.suggestion").removeClass("suggestion");
+			$(this).addClass("suggestion");
+			$(this).find(".radio_button").prop("checked", true);
+		}
 	});
 	
 	if ($(".wpmarketing").length) {

@@ -8,16 +8,11 @@
 	margin-top: 10px;
 }
 
-.wpmarketing h2 {
-	display: inline-block;
+.wpmarketing_header h2 {
+	float: left;
 }
 
-.wpmarketing_desc {
-	color: #777;
-	display: inline-block;
-}
-
-.wpmarketing .cta {
+.wpmarketing_header .cta {
 	float: right;
 }
 
@@ -87,6 +82,22 @@
 	display: none;
 }
 
+.app_icon .premium {
+	display: none;
+	position: absollute;
+}
+
+.app_icon.is_premium .premium {
+	display: block;
+	position: absolute;
+	top: 8px;
+	right: 8px;
+}
+
+.wpmarketing.unlocked .app_icon.is_premium .premium {
+	display: none;
+}
+
 .app_icon.is_coming_soon {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
 	filter: alpha(opacity=40);
@@ -99,6 +110,7 @@
 .app_icon.is_coming_soon .coming_soon {
 	display: block;
 	position: absolute;
+	width: 100px;
 	top: 15px;
 	left: 15px;
 }
@@ -190,7 +202,7 @@
 }
 
 .app .content .narrow_content {
-	max-width: 500px;
+	max-width: 600px;
 	margin: 0 auto;
 }
 
@@ -248,6 +260,84 @@
 .button_wrapper {
 	text-align: center;
 	margin: 40px 0; 
+}
+
+.pricing_model_wrapper {
+	margin: 20px 0 30px;
+}
+
+.pricing_model {
+	background: #eee;
+	border: 1px solid #ccc;
+	padding: 20px 20px 20px 60px;
+	border-radius: 7px;
+	margin-bottom: 20px;
+}
+
+.pricing_model .checklist, .pricing_model .action_area {
+	display: none;
+}
+
+.pricing_model.suggestion {
+	background: #DEFFEB;
+	border: 1px solid #5AB760;
+}
+
+.pricing_model.suggestion .checklist, .pricing_model.suggestion .action_area {
+	display: block;
+}
+
+.pricing_model .radio_button {
+	position: absolute;
+	margin-left: -35px;
+	margin-top: 2px;
+}
+
+.pricing_model .checklist {
+	float: left;
+	font-size: 11px;
+	line-height: 14px;
+}
+
+.pricing_model .action_area {
+	float: right;
+	text-align: center;
+	margin-top: 5px;
+}
+
+.pricing_model h5 {
+	font-weight: bold;
+	font-size: 32px;
+	line-height: 32px;
+	margin: 0 0 13px 0;
+	color: #366E3A;
+}
+
+.pricing_model h4 {
+	font-weight: bold;
+	margin: 0;
+	font-size: 18px;
+	line-height: 26px;
+}
+
+.pricing_model p {
+	margin: 5px 0 10px 0;
+}
+
+.wp-core-ui .pricing_model .button.button-hero {
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+.pricing_model .action_area .risk_reversal {
+	font-size: 11px;
+	color: #4B9850;
+	margin: 5px 0 0 0;
+}
+
+.pricing_model .action_area .risk_reversal strong {
+	font-size: 13px;
+	color: #366E3A;
 }
 
 .pricing_table {
@@ -640,4 +730,39 @@ footer, .wpmarketing_reset header, .wpmarketing_reset hgroup, .wpmarketing_reset
 
 .wpmarketing.locked .start_marketingfocus {
 	display: none;
+}
+
+@media screen and (max-width: 780px){
+	.start_marketingfocus, .end_marketingfocus {
+		display: none !important;
+	}
+	
+	.wpmarketing_header h2 {
+		float: none;
+		padding: 0px;
+		margin: 0;
+	}
+	
+	.wpmarketing_header .cta {
+		float: none;
+	}
+	
+	.wpmarketing .cta .button {
+		margin: 0;
+	}
+	
+	.wpmarketing_header {
+		text-align: center;
+	}
+	
+	.app_icon {
+		width: 100%;
+		margin: 5px 0 !important;
+	}
+	
+	.app .header h3 {
+		font-size: 24px;
+		line-height: 32px;
+		margin-bottom: 0;
+	}
 }

@@ -17,7 +17,7 @@
 			require_once("apps/relevant_text.php");
 			require_once("apps/ads_wizard.php");
 			require_once("apps/integrations.php");
-			require_once("apps/autosocializer.php");
+			require_once("apps/social_pro.php");
 			require_once("apps/settings.php");
 			require_once("apps/upgrade.php");
 		?>
