@@ -30,7 +30,7 @@ jQuery(function($) {
 				name: "SocialPro",
 				description: "Automatically announce posts via social media and interact.",
 				colour: "#552A99",
-				installed: true,
+				installed: false,
 				premium: true
 			},
 			touch_base: {

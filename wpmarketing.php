@@ -54,7 +54,7 @@ class WPMarketing {
 		global $mustache;
 		define("WPMARKETING_ROOT", dirname(__FILE__));
 		
-		require_once WPMARKETING_ROOT . "/admin/php/vendor/mustache/Autoloader.php";
+		require_once WPMARKETING_ROOT . "/admin/php/vendor/Mustache/Autoloader.php";
 		Mustache_Autoloader::register();
 		$mustache = new Mustache_Engine(array(
 			"loader" => new Mustache_Loader_FilesystemLoader(WPMARKETING_ROOT . "/public/php/templates/sway_page/widgets")
@@ -123,7 +123,7 @@ class WPMarketing {
 		global $wpmarketing;
 		$wpmarketing = WPMarketing::settings();
 		
-		if ($wpmarketing["convert_alert_status"] == "on") {
+		if (array_key_exists("convert_alert_status", $wpmarketing) && $wpmarketing["convert_alert_status"] == "on") {
 			require_once WPMARKETING_ROOT . "/public/php/apps/convert_alert.php";
 		}
 	}
